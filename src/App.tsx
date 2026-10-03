@@ -2170,8 +2170,9 @@ function HiddenProblems() {
                   </p>
                 </div>
                 <div className="shrink-0 flex items-center self-center text-muted-foreground group-hover:text-primary transition-colors">
-                  <Button variant="ghost" size="icon" className="rounded-full size-10">
-                    <ChevronRight className="size-6" />
+                  <Button variant="default" size="sm" className="shadow-sm font-semibold rounded-full px-5 h-9 bg-primary hover:bg-primary/90 text-primary-foreground group-hover:scale-105 transition-all">
+                    <MessageSquare className="size-4 mr-2" />
+                    Start Chat with Agent
                   </Button>
                 </div>
               </CardContent>
