@@ -43,45 +43,146 @@ const userIcon = L.divIcon({
 // --- Mock Data ---
 
 const erlangData1h = [
-  { time: "14:50", offered: 60, capacity: 60, gos: 5.2 },
-  { time: "14:55", offered: 62, capacity: 52, gos: 9.8 },
-  { time: "15:00", offered: 65, capacity: 52, gos: 12.5 },
-  { time: "15:05", offered: 66, capacity: 52, gos: 13.1 },
-  { time: "15:10", offered: 63, capacity: 52, gos: 10.5 },
-  { time: "15:15", offered: 60, capacity: 52, gos: 8.2 },
+  { time: "14:00", offered: 20, capacity: 60, gos: 0.1 },
+  { time: "14:05", offered: 24, capacity: 60, gos: 0.3 },
+  { time: "14:10", offered: 28, capacity: 60, gos: 0.4 },
+  { time: "14:15", offered: 32, capacity: 60, gos: 0.4 },
+  { time: "14:20", offered: 69, capacity: 60, gos: 4.5 },
+  { time: "14:25", offered: 70, capacity: 52, gos: 9 },
+  { time: "14:30", offered: 70, capacity: 52, gos: 9 },
+  { time: "14:35", offered: 68, capacity: 60, gos: 4 },
+  { time: "14:40", offered: 65, capacity: 60, gos: 2.5 },
+  { time: "14:45", offered: 26, capacity: 60, gos: 0.2 },
+  { time: "14:50", offered: 22, capacity: 60, gos: 0.2 },
+  { time: "14:55", offered: 18, capacity: 60, gos: 0.2 }
 ];
-const erlangData6h = [
-  { time: "12:00", offered: 35, capacity: 60, gos: 0.1 },
-  { time: "13:00", offered: 40, capacity: 60, gos: 0.5 },
-  { time: "14:00", offered: 48, capacity: 60, gos: 1.5 },
-  { time: "15:00", offered: 65, capacity: 52, gos: 12.5 },
-  { time: "16:00", offered: 62, capacity: 52, gos: 9.8 },
-  { time: "17:00", offered: 58, capacity: 52, gos: 6.2 },
+  const erlangData6h = [
+  { time: "12:00", offered: 20, capacity: 60, gos: 0.4 },
+  { time: "12:15", offered: 24, capacity: 60, gos: 0.4 },
+  { time: "12:30", offered: 28, capacity: 60, gos: 0.3 },
+  { time: "12:45", offered: 32, capacity: 60, gos: 0.3 },
+  { time: "13:00", offered: 34, capacity: 60, gos: 0.3 },
+  { time: "13:15", offered: 35, capacity: 60, gos: 0.3 },
+  { time: "13:30", offered: 35, capacity: 60, gos: 0.3 },
+  { time: "13:45", offered: 33, capacity: 60, gos: 0.3 },
+  { time: "14:00", offered: 30, capacity: 60, gos: 0.4 },
+  { time: "14:15", offered: 26, capacity: 60, gos: 0.5 },
+  { time: "14:30", offered: 57, capacity: 60, gos: 0.5 },
+  { time: "14:45", offered: 53, capacity: 52, gos: 0.5 },
+  { time: "15:00", offered: 48, capacity: 52, gos: 0.4 },
+  { time: "15:15", offered: 45, capacity: 60, gos: 0.4 },
+  { time: "15:30", offered: 42, capacity: 60, gos: 0.2 },
+  { time: "15:45", offered: 5, capacity: 60, gos: 0.4 },
+  { time: "16:00", offered: 5, capacity: 60, gos: 0.2 },
+  { time: "16:15", offered: 6, capacity: 60, gos: 0.4 },
+  { time: "16:30", offered: 8, capacity: 60, gos: 0.2 },
+  { time: "16:45", offered: 12, capacity: 60, gos: 0.4 },
+  { time: "17:00", offered: 16, capacity: 60, gos: 0.4 },
+  { time: "17:15", offered: 20, capacity: 60, gos: 0.1 },
+  { time: "17:30", offered: 25, capacity: 60, gos: 0.1 },
+  { time: "17:45", offered: 29, capacity: 60, gos: 0.3 }
 ];
-const erlangData24h = [
-  { time: "00:00", offered: 15, capacity: 60, gos: 0.01 },
-  { time: "04:00", offered: 10, capacity: 60, gos: 0.0 },
-  { time: "08:00", offered: 30, capacity: 60, gos: 0.1 },
-  { time: "12:00", offered: 45, capacity: 60, gos: 1.2 },
-  { time: "14:00", offered: 50, capacity: 60, gos: 2.0 },
-  { time: "15:00", offered: 65, capacity: 52, gos: 12.5 },
-  { time: "16:00", offered: 60, capacity: 52, gos: 8.2 },
-  { time: "20:00", offered: 40, capacity: 60, gos: 0.5 },
+  const erlangData24h = [
+  { time: "00:00", offered: 20, capacity: 60, gos: 0.4 },
+  { time: "00:30", offered: 24, capacity: 60, gos: 0 },
+  { time: "01:00", offered: 28, capacity: 60, gos: 0.3 },
+  { time: "01:30", offered: 32, capacity: 60, gos: 0 },
+  { time: "02:00", offered: 34, capacity: 60, gos: 0.2 },
+  { time: "02:30", offered: 35, capacity: 60, gos: 0 },
+  { time: "03:00", offered: 35, capacity: 60, gos: 0.3 },
+  { time: "03:30", offered: 33, capacity: 60, gos: 0.4 },
+  { time: "04:00", offered: 30, capacity: 60, gos: 0.4 },
+  { time: "04:30", offered: 26, capacity: 60, gos: 0.2 },
+  { time: "05:00", offered: 22, capacity: 60, gos: 0.5 },
+  { time: "05:30", offered: 18, capacity: 60, gos: 0.1 },
+  { time: "06:00", offered: 13, capacity: 60, gos: 0.1 },
+  { time: "06:30", offered: 10, capacity: 60, gos: 0.3 },
+  { time: "07:00", offered: 7, capacity: 60, gos: 0.3 },
+  { time: "07:30", offered: 5, capacity: 60, gos: 0.4 },
+  { time: "08:00", offered: 5, capacity: 60, gos: 0 },
+  { time: "08:30", offered: 6, capacity: 60, gos: 0.1 },
+  { time: "09:00", offered: 8, capacity: 60, gos: 0.4 },
+  { time: "09:30", offered: 12, capacity: 60, gos: 0.3 },
+  { time: "10:00", offered: 16, capacity: 60, gos: 0.3 },
+  { time: "10:30", offered: 20, capacity: 60, gos: 0.2 },
+  { time: "11:00", offered: 60, capacity: 60, gos: 0.4 },
+  { time: "11:30", offered: 64, capacity: 52, gos: 6 },
+  { time: "12:00", offered: 67, capacity: 52, gos: 7.5 },
+  { time: "12:30", offered: 69, capacity: 60, gos: 4.5 },
+  { time: "13:00", offered: 70, capacity: 60, gos: 5 },
+  { time: "13:30", offered: 35, capacity: 60, gos: 0.4 },
+  { time: "14:00", offered: 33, capacity: 60, gos: 0.2 },
+  { time: "14:30", offered: 30, capacity: 60, gos: 0.4 },
+  { time: "15:00", offered: 26, capacity: 60, gos: 0.2 },
+  { time: "15:30", offered: 22, capacity: 60, gos: 0.5 },
+  { time: "16:00", offered: 17, capacity: 60, gos: 0 },
+  { time: "16:30", offered: 13, capacity: 60, gos: 0.1 },
+  { time: "17:00", offered: 10, capacity: 60, gos: 0.4 },
+  { time: "17:30", offered: 7, capacity: 60, gos: 0.1 },
+  { time: "18:00", offered: 5, capacity: 60, gos: 0.5 },
+  { time: "18:30", offered: 5, capacity: 60, gos: 0.5 },
+  { time: "19:00", offered: 6, capacity: 60, gos: 0.4 },
+  { time: "19:30", offered: 9, capacity: 60, gos: 0.1 },
+  { time: "20:00", offered: 12, capacity: 60, gos: 0.2 },
+  { time: "20:30", offered: 16, capacity: 60, gos: 0.1 },
+  { time: "21:00", offered: 21, capacity: 60, gos: 0.3 },
+  { time: "21:30", offered: 25, capacity: 60, gos: 0.2 },
+  { time: "22:00", offered: 29, capacity: 60, gos: 0.1 },
+  { time: "22:30", offered: 32, capacity: 60, gos: 0.2 },
+  { time: "23:00", offered: 34, capacity: 60, gos: 0.3 },
+  { time: "23:30", offered: 35, capacity: 60, gos: 0.4 }
 ];
-const mwData = [
-  { time: "10:00", rsl: -45, throughput: 150 },
-  { time: "11:00", rsl: -47, throughput: 145 },
-  { time: "12:00", rsl: -55, throughput: 120 },
-  { time: "13:00", rsl: -72, throughput: 40 },
-  { time: "14:00", rsl: -85, throughput: 2 },
-  { time: "15:00", rsl: -88, throughput: 0.5 },
+  const mwData = [
+  { time: "00:00", rsl: -48, throughput: 143 },
+  { time: "01:00", rsl: -46, throughput: 145 },
+  { time: "02:00", rsl: -47, throughput: 145 },
+  { time: "03:00", rsl: -46, throughput: 141 },
+  { time: "04:00", rsl: -46, throughput: 148 },
+  { time: "05:00", rsl: -49, throughput: 144 },
+  { time: "06:00", rsl: -47, throughput: 147 },
+  { time: "07:00", rsl: -49, throughput: 141 },
+  { time: "08:00", rsl: -45, throughput: 143 },
+  { time: "09:00", rsl: -46, throughput: 150 },
+  { time: "10:00", rsl: -49, throughput: 149 },
+  { time: "11:00", rsl: -50, throughput: 147 },
+  { time: "12:00", rsl: -47, throughput: 148 },
+  { time: "13:00", rsl: -47, throughput: 147 },
+  { time: "14:00", rsl: -48, throughput: 142 },
+  { time: "15:00", rsl: -50, throughput: 141 },
+  { time: "16:00", rsl: -48, throughput: 142 },
+  { time: "17:00", rsl: -87, throughput: 4 },
+  { time: "18:00", rsl: -86, throughput: 1 },
+  { time: "19:00", rsl: -86, throughput: 1 },
+  { time: "20:00", rsl: -88, throughput: 0 },
+  { time: "21:00", rsl: -87, throughput: 1 },
+  { time: "22:00", rsl: -47, throughput: 149 },
+  { time: "23:00", rsl: -45, throughput: 141 }
 ];
-const signalingData = [
-  { time: "08:00", attachReq: 1200, success: 1190 },
-  { time: "09:00", attachReq: 1500, success: 1485 },
-  { time: "10:00", attachReq: 2100, success: 2050 },
-  { time: "11:00", attachReq: 4500, success: 120 },
-  { time: "12:00", attachReq: 5200, success: 80 },
+  const signalingData = [
+  { time: "00:00", attachReq: 1003, success: 1002 },
+  { time: "01:00", attachReq: 805, success: 788 },
+  { time: "02:00", attachReq: 1057, success: 1043 },
+  { time: "03:00", attachReq: 1071, success: 1060 },
+  { time: "04:00", attachReq: 1013, success: 1000 },
+  { time: "05:00", attachReq: 957, success: 952 },
+  { time: "06:00", attachReq: 1184, success: 1174 },
+  { time: "07:00", attachReq: 1014, success: 1006 },
+  { time: "08:00", attachReq: 1098, success: 1085 },
+  { time: "09:00", attachReq: 939, success: 929 },
+  { time: "10:00", attachReq: 994, success: 991 },
+  { time: "11:00", attachReq: 1159, success: 1141 },
+  { time: "12:00", attachReq: 958, success: 949 },
+  { time: "13:00", attachReq: 836, success: 822 },
+  { time: "14:00", attachReq: 809, success: 807 },
+  { time: "15:00", attachReq: 889, success: 870 },
+  { time: "16:00", attachReq: 1155, success: 1150 },
+  { time: "17:00", attachReq: 1148, success: 1143 },
+  { time: "18:00", attachReq: 854, success: 837 },
+  { time: "19:00", attachReq: 4694, success: 66 },
+  { time: "20:00", attachReq: 4536, success: 86 },
+  { time: "21:00", attachReq: 4514, success: 123 },
+  { time: "22:00", attachReq: 1097, success: 1088 },
+  { time: "23:00", attachReq: 987, success: 984 }
 ];
 
 const complaintsList = [
@@ -434,6 +535,7 @@ function ErlangInteractiveChart({ onAnalyzeTime }: { onAnalyzeTime: (range: stri
             <Line yAxisId="left" type="monotone" dataKey="capacity" name="Available TCH" stroke="#fef08a" strokeWidth={2} dot={false} activeDot={{ r: 6 }} />
             <Line yAxisId="left" type="monotone" dataKey="offered" name="Offered Traffic (E)" stroke="#3b82f6" strokeWidth={2} dot={false} activeDot={{ r: 6 }} />
             <Line yAxisId="right" type="monotone" dataKey="gos" name="Blocking Prob %" stroke="#22c55e" strokeWidth={2} dot={false} activeDot={{ r: 6 }} />
+            <Brush dataKey="time" height={30} stroke="#3b82f6" fill="rgba(255,255,255,0.05)" />
           </ComposedChart>
         </ResponsiveContainer>
       </div>
@@ -442,14 +544,18 @@ function ErlangInteractiveChart({ onAnalyzeTime }: { onAnalyzeTime: (range: stri
 }
 
 function MicrowaveInteractiveChart({ onAnalyzeTime }: { onAnalyzeTime: (range: string) => void }) {
+  const [range, setRange] = useState('6h');
   const [startTime, setStartTime] = useState("12:00");
   const [endTime, setEndTime] = useState("14:30");
+  const data = range === '6h' ? mwData.slice(-6) : range === '12h' ? mwData.slice(-12) : mwData;
 
   return (
-    <div className="w-full relative h-[400px] rounded-xl overflow-hidden border border-border/80 shadow-inner flex flex-col bg-background">
+    <div className="w-full relative h-[450px] rounded-xl overflow-hidden border border-border/80 shadow-inner flex flex-col bg-background">
       <div className="flex flex-wrap gap-3 items-center justify-between p-3 border-b border-border/50 bg-muted/20 shrink-0">
         <div className="flex gap-1 bg-muted p-1 rounded-lg border border-border/50 shadow-sm">
-          <Badge variant="outline" className="bg-primary/5 text-primary">Microwave Telemetry</Badge>
+          <Button variant={range === '6h' ? 'default' : 'ghost'} size="sm" className="h-7 text-xs px-3 shadow-none" onClick={() => setRange('6h')}>6h View</Button>
+          <Button variant={range === '12h' ? 'default' : 'ghost'} size="sm" className="h-7 text-xs px-3 shadow-none" onClick={() => setRange('12h')}>12h View</Button>
+          <Button variant={range === '24h' ? 'default' : 'ghost'} size="sm" className="h-7 text-xs px-3 shadow-none" onClick={() => setRange('24h')}>24h View</Button>
         </div>
         <div className="flex items-center gap-2 bg-background p-1.5 rounded-lg border border-border shadow-sm">
           <Clock className="size-4 text-muted-foreground ml-2" />
@@ -466,7 +572,7 @@ function MicrowaveInteractiveChart({ onAnalyzeTime }: { onAnalyzeTime: (range: s
       </div>
       <div className="flex-1 p-5 pb-0">
         <ResponsiveContainer width="100%" height="100%">
-          <ComposedChart data={mwData} margin={{ top: 10 }}>
+          <ComposedChart data={data} margin={{ top: 10, bottom: 20 }}>
             <CartesianGrid vertical={false} stroke="rgba(255,255,255,0.15)" />
             <XAxis dataKey="time" axisLine={{ stroke: '#ffffff', strokeWidth: 1, opacity: 0.7 }} tickLine={{ stroke: '#ffffff', strokeWidth: 1, opacity: 0.7 }} tick={{ fill: '#e5e7eb', fontSize: 12, fontWeight: 500 }} dy={10} angle={0} textAnchor="middle" height={40} />
             <YAxis yAxisId="left" domain={[-90, -40]} axisLine={{ stroke: '#ffffff', strokeWidth: 1, opacity: 0.7 }} tickLine={{ stroke: '#ffffff', strokeWidth: 1, opacity: 0.7 }} tick={{ fill: '#e5e7eb', fontSize: 12, fontWeight: 500 }} label={{ value: 'RSL (dBm)', angle: -90, position: 'insideLeft', fontSize: 12, fill: "#e5e7eb", opacity: 0.8 }} dx={-5} />
@@ -478,6 +584,7 @@ function MicrowaveInteractiveChart({ onAnalyzeTime }: { onAnalyzeTime: (range: s
             
             <Line yAxisId="right" type="monotone" dataKey="throughput" name="User Throughput" stroke="#3b82f6" strokeWidth={2} dot={false} activeDot={{ r: 6 }} />
             <Line yAxisId="left" type="monotone" dataKey="rsl" name="Receive Signal Level" stroke="#f97316" strokeWidth={2} dot={false} activeDot={{ r: 6 }} />
+            <Brush dataKey="time" height={30} stroke="#3b82f6" fill="rgba(255,255,255,0.05)" />
           </ComposedChart>
         </ResponsiveContainer>
       </div>
@@ -486,14 +593,18 @@ function MicrowaveInteractiveChart({ onAnalyzeTime }: { onAnalyzeTime: (range: s
 }
 
 function CoreSignalingInteractiveChart({ onAnalyzeTime }: { onAnalyzeTime: (range: string) => void }) {
+  const [range, setRange] = useState('6h');
   const [startTime, setStartTime] = useState("10:00");
   const [endTime, setEndTime] = useState("12:00");
+  const data = range === '6h' ? signalingData.slice(-6) : range === '12h' ? signalingData.slice(-12) : signalingData;
 
   return (
-    <div className="w-full relative h-[400px] rounded-xl overflow-hidden border border-border/80 shadow-inner flex flex-col bg-background">
+    <div className="w-full relative h-[450px] rounded-xl overflow-hidden border border-border/80 shadow-inner flex flex-col bg-background">
       <div className="flex flex-wrap gap-3 items-center justify-between p-3 border-b border-border/50 bg-muted/20 shrink-0">
         <div className="flex gap-1 bg-muted p-1 rounded-lg border border-border/50 shadow-sm">
-          <Badge variant="outline" className="bg-primary/5 text-primary">S1-MME Signaling</Badge>
+          <Button variant={range === '6h' ? 'default' : 'ghost'} size="sm" className="h-7 text-xs px-3 shadow-none" onClick={() => setRange('6h')}>6h View</Button>
+          <Button variant={range === '12h' ? 'default' : 'ghost'} size="sm" className="h-7 text-xs px-3 shadow-none" onClick={() => setRange('12h')}>12h View</Button>
+          <Button variant={range === '24h' ? 'default' : 'ghost'} size="sm" className="h-7 text-xs px-3 shadow-none" onClick={() => setRange('24h')}>24h View</Button>
         </div>
         <div className="flex items-center gap-2 bg-background p-1.5 rounded-lg border border-border shadow-sm">
           <Clock className="size-4 text-muted-foreground ml-2" />
@@ -510,7 +621,7 @@ function CoreSignalingInteractiveChart({ onAnalyzeTime }: { onAnalyzeTime: (rang
       </div>
       <div className="flex-1 p-5 pb-0">
         <ResponsiveContainer width="100%" height="100%">
-          <ComposedChart data={signalingData} margin={{ top: 10 }}>
+          <ComposedChart data={data} margin={{ top: 10, bottom: 20 }}>
             <CartesianGrid vertical={false} stroke="rgba(255,255,255,0.15)" />
             <XAxis dataKey="time" axisLine={{ stroke: '#ffffff', strokeWidth: 1, opacity: 0.7 }} tickLine={{ stroke: '#ffffff', strokeWidth: 1, opacity: 0.7 }} tick={{ fill: '#e5e7eb', fontSize: 12, fontWeight: 500 }} dy={10} angle={0} textAnchor="middle" height={40} />
             <YAxis yAxisId="left" axisLine={{ stroke: '#ffffff', strokeWidth: 1, opacity: 0.7 }} tickLine={{ stroke: '#ffffff', strokeWidth: 1, opacity: 0.7 }} tick={{ fill: '#e5e7eb', fontSize: 12, fontWeight: 500 }} dx={-5} />
@@ -521,6 +632,7 @@ function CoreSignalingInteractiveChart({ onAnalyzeTime }: { onAnalyzeTime: (rang
             
             <Line yAxisId="left" type="monotone" dataKey="attachReq" name="Attach Requests (Attempted)" stroke="#ef4444" strokeWidth={2} dot={false} activeDot={{ r: 6 }} />
             <Line yAxisId="right" type="monotone" dataKey="success" name="Successful Attach" stroke="#10b981" strokeWidth={2} dot={false} activeDot={{ r: 6 }} />
+            <Brush dataKey="time" height={30} stroke="#3b82f6" fill="rgba(255,255,255,0.05)" />
           </ComposedChart>
         </ResponsiveContainer>
       </div>
