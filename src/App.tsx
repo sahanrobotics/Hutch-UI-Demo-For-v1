@@ -42,207 +42,14 @@ const userIcon = L.divIcon({
 
 // --- Mock Data ---
 
-const erlangData1h = [
-  { time: "14:00", offered: 20, capacity: 60, gos: 0.1 },
-  { time: "14:05", offered: 24, capacity: 60, gos: 0.3 },
-  { time: "14:10", offered: 28, capacity: 60, gos: 0.4 },
-  { time: "14:15", offered: 32, capacity: 60, gos: 0.4 },
-  { time: "14:20", offered: 69, capacity: 60, gos: 4.5 },
-  { time: "14:25", offered: 70, capacity: 52, gos: 9 },
-  { time: "14:30", offered: 70, capacity: 52, gos: 9 },
-  { time: "14:35", offered: 68, capacity: 60, gos: 4 },
-  { time: "14:40", offered: 65, capacity: 60, gos: 2.5 },
-  { time: "14:45", offered: 26, capacity: 60, gos: 0.2 },
-  { time: "14:50", offered: 22, capacity: 60, gos: 0.2 },
-  { time: "14:55", offered: 18, capacity: 60, gos: 0.2 }
-];
-  const erlangData6h = [
-  { time: "12:00", offered: 20, capacity: 60, gos: 0.4 },
-  { time: "12:15", offered: 24, capacity: 60, gos: 0.4 },
-  { time: "12:30", offered: 28, capacity: 60, gos: 0.3 },
-  { time: "12:45", offered: 32, capacity: 60, gos: 0.3 },
-  { time: "13:00", offered: 34, capacity: 60, gos: 0.3 },
-  { time: "13:15", offered: 35, capacity: 60, gos: 0.3 },
-  { time: "13:30", offered: 35, capacity: 60, gos: 0.3 },
-  { time: "13:45", offered: 33, capacity: 60, gos: 0.3 },
-  { time: "14:00", offered: 30, capacity: 60, gos: 0.4 },
-  { time: "14:15", offered: 26, capacity: 60, gos: 0.5 },
-  { time: "14:30", offered: 57, capacity: 60, gos: 0.5 },
-  { time: "14:45", offered: 53, capacity: 52, gos: 0.5 },
-  { time: "15:00", offered: 48, capacity: 52, gos: 0.4 },
-  { time: "15:15", offered: 45, capacity: 60, gos: 0.4 },
-  { time: "15:30", offered: 42, capacity: 60, gos: 0.2 },
-  { time: "15:45", offered: 5, capacity: 60, gos: 0.4 },
-  { time: "16:00", offered: 5, capacity: 60, gos: 0.2 },
-  { time: "16:15", offered: 6, capacity: 60, gos: 0.4 },
-  { time: "16:30", offered: 8, capacity: 60, gos: 0.2 },
-  { time: "16:45", offered: 12, capacity: 60, gos: 0.4 },
-  { time: "17:00", offered: 16, capacity: 60, gos: 0.4 },
-  { time: "17:15", offered: 20, capacity: 60, gos: 0.1 },
-  { time: "17:30", offered: 25, capacity: 60, gos: 0.1 },
-  { time: "17:45", offered: 29, capacity: 60, gos: 0.3 }
-];
-  const erlangData24h = [
-  { time: "00:00", offered: 20, capacity: 60, gos: 0.4 },
-  { time: "00:30", offered: 24, capacity: 60, gos: 0 },
-  { time: "01:00", offered: 28, capacity: 60, gos: 0.3 },
-  { time: "01:30", offered: 32, capacity: 60, gos: 0 },
-  { time: "02:00", offered: 34, capacity: 60, gos: 0.2 },
-  { time: "02:30", offered: 35, capacity: 60, gos: 0 },
-  { time: "03:00", offered: 35, capacity: 60, gos: 0.3 },
-  { time: "03:30", offered: 33, capacity: 60, gos: 0.4 },
-  { time: "04:00", offered: 30, capacity: 60, gos: 0.4 },
-  { time: "04:30", offered: 26, capacity: 60, gos: 0.2 },
-  { time: "05:00", offered: 22, capacity: 60, gos: 0.5 },
-  { time: "05:30", offered: 18, capacity: 60, gos: 0.1 },
-  { time: "06:00", offered: 13, capacity: 60, gos: 0.1 },
-  { time: "06:30", offered: 10, capacity: 60, gos: 0.3 },
-  { time: "07:00", offered: 7, capacity: 60, gos: 0.3 },
-  { time: "07:30", offered: 5, capacity: 60, gos: 0.4 },
-  { time: "08:00", offered: 5, capacity: 60, gos: 0 },
-  { time: "08:30", offered: 6, capacity: 60, gos: 0.1 },
-  { time: "09:00", offered: 8, capacity: 60, gos: 0.4 },
-  { time: "09:30", offered: 12, capacity: 60, gos: 0.3 },
-  { time: "10:00", offered: 16, capacity: 60, gos: 0.3 },
-  { time: "10:30", offered: 20, capacity: 60, gos: 0.2 },
-  { time: "11:00", offered: 60, capacity: 60, gos: 0.4 },
-  { time: "11:30", offered: 64, capacity: 52, gos: 6 },
-  { time: "12:00", offered: 67, capacity: 52, gos: 7.5 },
-  { time: "12:30", offered: 69, capacity: 60, gos: 4.5 },
-  { time: "13:00", offered: 70, capacity: 60, gos: 5 },
-  { time: "13:30", offered: 35, capacity: 60, gos: 0.4 },
-  { time: "14:00", offered: 33, capacity: 60, gos: 0.2 },
-  { time: "14:30", offered: 30, capacity: 60, gos: 0.4 },
-  { time: "15:00", offered: 26, capacity: 60, gos: 0.2 },
-  { time: "15:30", offered: 22, capacity: 60, gos: 0.5 },
-  { time: "16:00", offered: 17, capacity: 60, gos: 0 },
-  { time: "16:30", offered: 13, capacity: 60, gos: 0.1 },
-  { time: "17:00", offered: 10, capacity: 60, gos: 0.4 },
-  { time: "17:30", offered: 7, capacity: 60, gos: 0.1 },
-  { time: "18:00", offered: 5, capacity: 60, gos: 0.5 },
-  { time: "18:30", offered: 5, capacity: 60, gos: 0.5 },
-  { time: "19:00", offered: 6, capacity: 60, gos: 0.4 },
-  { time: "19:30", offered: 9, capacity: 60, gos: 0.1 },
-  { time: "20:00", offered: 12, capacity: 60, gos: 0.2 },
-  { time: "20:30", offered: 16, capacity: 60, gos: 0.1 },
-  { time: "21:00", offered: 21, capacity: 60, gos: 0.3 },
-  { time: "21:30", offered: 25, capacity: 60, gos: 0.2 },
-  { time: "22:00", offered: 29, capacity: 60, gos: 0.1 },
-  { time: "22:30", offered: 32, capacity: 60, gos: 0.2 },
-  { time: "23:00", offered: 34, capacity: 60, gos: 0.3 },
-  { time: "23:30", offered: 35, capacity: 60, gos: 0.4 }
-];
-  const mwData = [
-  { time: "00:00", rsl: -48, throughput: 143 },
-  { time: "01:00", rsl: -46, throughput: 145 },
-  { time: "02:00", rsl: -47, throughput: 145 },
-  { time: "03:00", rsl: -46, throughput: 141 },
-  { time: "04:00", rsl: -46, throughput: 148 },
-  { time: "05:00", rsl: -49, throughput: 144 },
-  { time: "06:00", rsl: -47, throughput: 147 },
-  { time: "07:00", rsl: -49, throughput: 141 },
-  { time: "08:00", rsl: -45, throughput: 143 },
-  { time: "09:00", rsl: -46, throughput: 150 },
-  { time: "10:00", rsl: -49, throughput: 149 },
-  { time: "11:00", rsl: -50, throughput: 147 },
-  { time: "12:00", rsl: -47, throughput: 148 },
-  { time: "13:00", rsl: -47, throughput: 147 },
-  { time: "14:00", rsl: -48, throughput: 142 },
-  { time: "15:00", rsl: -50, throughput: 141 },
-  { time: "16:00", rsl: -48, throughput: 142 },
-  { time: "17:00", rsl: -87, throughput: 4 },
-  { time: "18:00", rsl: -86, throughput: 1 },
-  { time: "19:00", rsl: -86, throughput: 1 },
-  { time: "20:00", rsl: -88, throughput: 0 },
-  { time: "21:00", rsl: -87, throughput: 1 },
-  { time: "22:00", rsl: -47, throughput: 149 },
-  { time: "23:00", rsl: -45, throughput: 141 }
-];
-  const signalingData = [
-  { time: "00:00", attachReq: 1003, success: 1002 },
-  { time: "01:00", attachReq: 805, success: 788 },
-  { time: "02:00", attachReq: 1057, success: 1043 },
-  { time: "03:00", attachReq: 1071, success: 1060 },
-  { time: "04:00", attachReq: 1013, success: 1000 },
-  { time: "05:00", attachReq: 957, success: 952 },
-  { time: "06:00", attachReq: 1184, success: 1174 },
-  { time: "07:00", attachReq: 1014, success: 1006 },
-  { time: "08:00", attachReq: 1098, success: 1085 },
-  { time: "09:00", attachReq: 939, success: 929 },
-  { time: "10:00", attachReq: 994, success: 991 },
-  { time: "11:00", attachReq: 1159, success: 1141 },
-  { time: "12:00", attachReq: 958, success: 949 },
-  { time: "13:00", attachReq: 836, success: 822 },
-  { time: "14:00", attachReq: 809, success: 807 },
-  { time: "15:00", attachReq: 889, success: 870 },
-  { time: "16:00", attachReq: 1155, success: 1150 },
-  { time: "17:00", attachReq: 1148, success: 1143 },
-  { time: "18:00", attachReq: 854, success: 837 },
-  { time: "19:00", attachReq: 4694, success: 66 },
-  { time: "20:00", attachReq: 4536, success: 86 },
-  { time: "21:00", attachReq: 4514, success: 123 },
-  { time: "22:00", attachReq: 1097, success: 1088 },
-  { time: "23:00", attachReq: 987, success: 984 }
-];
-
-const complaintsList = [
-  {
-    id: "c-1004",
-    userId: "Batch: 800+ Users",
-    issue: "Emergency Calls Only (No Registration)",
-    location: "Peradeniya University",
-    source: "NOC Alert",
-    priority: "Critical",
-    priorityColor: "bg-red-500",
-    badgeColor: "bg-background text-red-500 border-border/50",
-    time: "10 mins ago",
-    status: "Deep AI Analysis Complete"
-  },
-  {
-    id: "c-1003",
-    userId: "+94 77 112 9988",
-    issue: "Extremely Slow 4G Data (High Latency)",
-    location: "Nuwara Eliya Town",
-    source: "Mobile App",
-    priority: "High",
-    priorityColor: "bg-orange-500",
-    badgeColor: "bg-background text-orange-400 border-border/50",
-    time: "25 mins ago",
-    status: "AI Analyzed"
-  },
-  {
-    id: "c-1002",
-    userId: "UID-45920",
-    issue: "Intermittent Call Drops & Slow Data",
-    location: "Kandy City Center",
-    source: "Mobile App",
-    priority: "Critical",
-    priorityColor: "bg-purple-500",
-    badgeColor: "bg-background text-purple-400 border-border/50",
-    time: "1 hr ago",
-    status: "Deep AI Analysis Complete"
-  },
-  {
-    id: "c-1001",
-    userId: "+94 77 829 1029",
-    issue: "Total Signal Loss (No Service)",
-    location: "Gampola South",
-    source: "SMS",
-    priority: "High",
-    priorityColor: "bg-red-500",
-    badgeColor: "bg-background text-red-400 border-border/50",
-    time: "2 hrs ago",
-    status: "Resolved"
-  },
-];
-
-const HIDDEN_PROBLEMS = [
-  { id: 'h-1001', title: 'Silent RRC Connection Drops', location: 'Nuwara Eliya', timeFrame: 'weekly', detected: '4 days ago', severity: 'High', description: 'AI detected a 14% increase in RRC drop rate during night hours. 0 user complaints received.', category: 'RAN/RF' },
-  { id: 'h-1002', title: 'Creeping Intercell Interference', location: 'Colombo Port', timeFrame: 'monthly', detected: '2 weeks ago', severity: 'Critical', description: 'Gradual SINR degradation over 30 days due to unchecked new high-rise reflections.', category: 'Interference' },
-  { id: 'h-1003', title: 'Seasonal Fiber Attenuation', location: 'Kandy Hills', timeFrame: 'yearly', detected: 'Last Month', severity: 'Medium', description: 'Pattern recognized: Backhaul microwave fading perfectly correlated with monsoon humidity cycles over 3 years.', category: 'Backhaul' },
-  { id: 'h-1004', title: 'Ghost Handover Failures', location: 'Galle Fort', timeFrame: 'weekly', detected: 'Yesterday', severity: 'High', description: 'Automated UE traces show handovers failing and silently retrying 5+ times before success.', category: 'Signaling' },
-  { id: 'h-1005', title: 'Dormant Core Bottleneck', location: 'National Data Center', timeFrame: 'monthly', detected: '3 weeks ago', severity: 'Critical', description: 'SGW throughput hitting 99% capacity for micro-bursts of 2 seconds every day at 8:00 PM.', category: 'Core (EPC)' },
-];
+let erlangData1h: any[] = [];
+let erlangData6h: any[] = [];
+let erlangData24h: any[] = [];
+let mwData: any[] = [];
+let signalingData: any[] = [];
+let complaintsList: any[] = [];
+let HIDDEN_PROBLEMS: any[] = [];
+let globalDataLoaded = false;
 
 function Layout({ children, checklists, setChecklists }: { children: React.ReactNode, checklists: string[], setChecklists: any }) {
   const location = useLocation();
@@ -686,63 +493,22 @@ function ProblemChat({ checklists, setChecklists }: { checklists: string[], setC
   }
 
   const [messages, setMessages] = useState<any[]>([]);
+  const [isChatLoading, setIsChatLoading] = useState(true);
 
   useEffect(() => {
-    if (id === 'c-1001') {
-      setMessages([{
-        role: 'ai',
-        type: 'initial-analysis-power',
-        content: `I have intercepted a high-priority SMS complaint from **${complaint?.userId}** for **Total Signal Loss** in **Gampola South**. I have proactively analyzed the network data and alarms for this location.`
-      }]);
-    } else if (id === 'c-1002') {
-      setMessages([{
-        role: 'ai',
-        type: 'initial-analysis-deep',
-        content: `CRITICAL: User **${complaint?.userId}** reported **Intermittent Call Drops & Slow Data** via the Mobile App. Triangulated with 14 other hidden network anomalies in **Kandy City Center**. \n\nI have run a **deep multi-layer RF and Erlang Capacity analysis**. Here is the detailed step-by-step breakdown:`
-      }]);
-    } else if (id === 'c-1003') {
-      setMessages([{
-        role: 'ai',
-        type: 'initial-analysis-backhaul',
-        content: `I have intercepted a complaint from **${complaint?.userId}** reporting **Extremely Slow 4G Data (High Latency)** in **Nuwara Eliya Town**. \n\nI initiated a cross-domain correlation between RAN metrics, Backhaul Microwave links, and Weather APIs. Here is the root cause analysis:`
-      }]);
-    } else if (id === 'c-1004') {
-      setMessages([{
-        role: 'ai',
-        type: 'initial-analysis-core',
-        content: `URGENT NOC ALERT: A massive spike of **"Emergency Calls Only"** incidents just triggered at **Peradeniya University**. Over 800+ users are failing to latch to the network. \n\nI have traced the signaling flow from the eNodeB all the way to the Core Network (EPC). Here is the immediate diagnosis:`
-      }]);
-    } else if (id === 'h-1001') {
-      setMessages([{
-        role: 'ai',
-        type: 'initial-analysis-hidden',
-        content: `I have autonomously detected a pattern of **Silent RRC Connection Drops** in **Nuwara Eliya**. No user complaints were filed, but my telemetry sweeps identified a 14% increase in drop rates during night hours over the past week. \n\nI traced this to an automated power-saving feature aggressively shutting down carriers. I recommend re-tuning the threshold.`
-      }]);
-    } else if (id === 'h-1002') {
-      setMessages([{
-        role: 'ai',
-        type: 'initial-analysis-hidden',
-        content: `A **Creeping Intercell Interference** issue in **Colombo Port** has been flagged. This is a monthly hidden trend. Over the last 30 days, average SINR has degraded by 4dB. \n\nAnalysis of propagation delay and timing advance indicates a newly constructed high-rise is causing severe signal reflection. Remote electrical tilt (RET) adjustment is required.`
-      }]);
-    } else if (id === 'h-1003') {
-      setMessages([{
-        role: 'ai',
-        type: 'initial-analysis-hidden',
-        content: `I have identified a yearly recurring anomaly: **Seasonal Fiber Attenuation** in the **Kandy Hills** aggregation ring. \n\nBy correlating 3 years of performance data with weather APIs, I found that backhaul microwave links and certain exposed fiber joints suffer massive fading perfectly synced with the monsoon humidity cycles. Preventive maintenance is highly advised before next month.`
-      }]);
-    } else if (id === 'h-1004') {
-      setMessages([{
-        role: 'ai',
-        type: 'initial-analysis-hidden',
-        content: `I detected a massive volume of **Ghost Handover Failures** near **Galle Fort**. Users are not dropping calls, but their phones are silently failing handovers and retrying up to 8 times before succeeding, draining UE batteries and congesting signaling links. \n\nThis weekly trend maps to a misconfigured X2 interface between eNodeB-GF1 and eNodeB-GF2.`
-      }]);
-    } else if (id === 'h-1005') {
-      setMessages([{
-        role: 'ai',
-        type: 'initial-analysis-hidden',
-        content: `A **Dormant Core Bottleneck** was uncovered in the National Data Center. \n\nThis monthly anomaly shows the SGW (Serving Gateway) hitting 99% CPU capacity for micro-bursts of exactly 2 seconds every day at 8:00 PM. No alarms trigger because the duration is under the 5-minute NOC threshold. This indicates a massive automated IoT payload synchronization.`
-      }]);
-    }
+    setIsChatLoading(true);
+    fetch(`http://localhost:3001/api/chat/init/${id}`)
+      .then(res => res.json())
+      .then(data => {
+         if (data.messages) {
+            setMessages(data.messages);
+         }
+         setIsChatLoading(false);
+      })
+      .catch(err => {
+         console.error('Failed to init chat', err);
+         setIsChatLoading(false);
+      });
   }, [id, complaint]);
 
   useEffect(() => {
@@ -763,53 +529,22 @@ function ProblemChat({ checklists, setChecklists }: { checklists: string[], setC
     }
     setIsTyping(true);
 
-    setTimeout(() => {
-      setIsTyping(false);
-
-      if (userMsg.includes("Generate User Feedback")) {
-        setMessages(prev => [...prev, {
-          role: 'ai',
-          type: 'translations',
-          content: `I have generated simple, customer-friendly notifications for affected users regarding this outage.`
-        }]);
-      } else if (userMsg.includes("deep research")) {
-        setMessages(prev => [...prev, {
-          role: 'ai',
-          type: 'deep-research',
-          content: `I have pulled historical fault logs for the past 90 days and scanned adjacent sector behaviors.`
-        }]);
-      } else if (userMsg.includes("Analyze behavior inside the")) {
-        setMessages(prev => [...prev, {
-          role: 'ai',
-          type: 'area-analysis',
-          content: `Scanning network behavior for all active sessions within that radius... \n\nI detect multiple correlated anomalies inside this geographic boundary matching the primary failure signature.`
-        }]);
-      } else if (userMsg.includes("Analyze the specific Erlang congestion spike")) {
-        setMessages(prev => [...prev, {
-          role: 'ai',
-          type: 'time-analysis',
-          content: `I have extracted the core data points from the selected time window.\n\n**Finding:** The data reveals a sudden and massive correlation between the exact moment the hardware alarm triggered and the immediate drop in capacity. Because the physical user traffic volume remained high while the capacity shrank, the Blocking Probability exponentially skyrocketed.`
-        }]);
-      } else if (userMsg.includes("Forwarded the generated translations")) {
-        setMessages(prev => [...prev, {
-          role: 'ai',
-          type: 'text',
-          content: "Done. The draft has been queued directly into the Customer Care Zendesk portal for final approval and dispatch."
-        }]);
-      } else if (userMsg.includes("Dispatched the automated SMS")) {
-        setMessages(prev => [...prev, {
-          role: 'ai',
-          type: 'text',
-          content: "Broadcast sent successfully via SMPP gateway. 1,420 users in the affected cell radius have received the notification."
-        }]);
-      } else {
-        setMessages(prev => [...prev, {
-          role: 'ai',
-          type: 'text',
-          content: "Action executed via NOC API. Real-time telemetry confirms the mitigation script has been deployed successfully. Traffic is normalizing."
-        }]);
-      }
-    }, 1500);
+    fetch('http://localhost:3001/api/chat/message', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ id, message: fullMsg, context: {} })
+    })
+    .then(res => res.json())
+    .then(data => {
+       setIsTyping(false);
+       if (data.messages && data.messages.length > 0) {
+          setMessages(prev => [...prev, ...data.messages]);
+       }
+    })
+    .catch(err => {
+       console.error(err);
+       setIsTyping(false);
+    });
   };
 
   const handleReferenceStep = (stepNum: number, title: string) => {
@@ -889,7 +624,29 @@ function ProblemChat({ checklists, setChecklists }: { checklists: string[], setC
           <Badge variant="outline" className="bg-background text-muted-foreground shadow-sm">Today, {complaint.time}</Badge>
         </div>
 
-        {messages.map((msg, i) => (
+        {isChatLoading ? (
+          <div className="flex flex-col gap-4 w-full max-w-3xl mx-auto animate-pulse">
+            <div className="flex items-center gap-2 mb-2 pl-1">
+              <div className="size-8 rounded-full bg-muted flex items-center justify-center shadow-md"></div>
+              <div className="h-4 w-32 bg-muted rounded"></div>
+            </div>
+            <div className="bg-muted/30 border border-border/50 px-5 py-4 rounded-3xl rounded-tl-sm shadow-sm max-w-[90%] ml-11 space-y-3">
+              <div className="h-3 w-[80%] bg-muted rounded"></div>
+              <div className="h-3 w-[95%] bg-muted rounded"></div>
+              <div className="h-3 w-[60%] bg-muted rounded"></div>
+            </div>
+            <div className="mt-6 relative border-l border-border/50 ml-5 pl-10 space-y-8 pb-4">
+               <div className="relative">
+                 <div className="absolute -left-[53px] top-1.5 size-6 rounded-full bg-muted border border-border/60"></div>
+                 <div className="bg-card border border-border/60 shadow-sm rounded-xl h-48 w-full"></div>
+               </div>
+               <div className="relative">
+                 <div className="absolute -left-[53px] top-1.5 size-6 rounded-full bg-muted border border-border/60"></div>
+                 <div className="bg-card border border-border/60 shadow-sm rounded-xl h-64 w-full"></div>
+               </div>
+            </div>
+          </div>
+        ) : messages.map((msg, i) => (
           <div key={i} id={`msg-${i}`} className={`flex flex-col gap-2 w-full max-w-3xl mx-auto`}>
             {msg.role === 'ai' && (
               <div className="flex items-center gap-2 mb-2 pl-1">
@@ -2261,6 +2018,34 @@ function SettingsPage() {
 
 export default function App() {
   const [checklists, setChecklists] = useState<string[]>([]);
+  const [dataLoaded, setDataLoaded] = useState(globalDataLoaded);
+
+  useEffect(() => {
+    if (globalDataLoaded) return;
+    Promise.all([
+      fetch('http://localhost:3001/api/data/complaints').then(r => r.json()),
+      fetch('http://localhost:3001/api/data/hidden-problems').then(r => r.json()),
+      fetch('http://localhost:3001/api/data/charts/erlang1h').then(r => r.json()),
+      fetch('http://localhost:3001/api/data/charts/erlang6h').then(r => r.json()),
+      fetch('http://localhost:3001/api/data/charts/erlang24h').then(r => r.json()),
+      fetch('http://localhost:3001/api/data/charts/mw').then(r => r.json()),
+      fetch('http://localhost:3001/api/data/charts/signaling').then(r => r.json())
+    ]).then(([complaints, hidden, e1, e6, e24, mw, sig]) => {
+      complaintsList = complaints;
+      HIDDEN_PROBLEMS = hidden;
+      erlangData1h = e1;
+      erlangData6h = e6;
+      erlangData24h = e24;
+      mwData = mw;
+      signalingData = sig;
+      globalDataLoaded = true;
+      setDataLoaded(true);
+    }).catch(console.error);
+  }, []);
+
+  if (!dataLoaded) {
+    return <div className="h-screen w-screen flex items-center justify-center bg-background text-primary font-bold">Initializing Data from Backend...</div>;
+  }
   
   return (
     <>
