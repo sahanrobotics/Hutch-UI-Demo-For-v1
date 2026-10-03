@@ -870,13 +870,27 @@ function ProblemChat({ checklists, setChecklists }: { checklists: string[], setC
         </div>
       )}
 
+      <div className="hidden xl:flex absolute left-8 top-1/2 -translate-y-1/2 flex-col gap-4 z-50">
+        {messages.map((_, idx) => (
+          <button 
+            key={idx} 
+            className="size-3 rounded-full bg-border/60 hover:bg-primary hover:scale-125 transition-all cursor-pointer shadow-sm" 
+            onClick={() => {
+              const el = document.getElementById(`msg-${idx}`);
+              if (el) el.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            }} 
+            title={`Scroll to message ${idx + 1}`}
+          />
+        ))}
+      </div>
+
       <div className="flex-1 overflow-y-auto p-8 pb-48 space-y-8 bg-background" ref={scrollRef as any}>
         <div className="flex justify-center mb-8">
           <Badge variant="outline" className="bg-background text-muted-foreground shadow-sm">Today, {complaint.time}</Badge>
         </div>
 
         {messages.map((msg, i) => (
-          <div key={i} className={`flex flex-col gap-2 w-full max-w-3xl mx-auto`}>
+          <div key={i} id={`msg-${i}`} className={`flex flex-col gap-2 w-full max-w-3xl mx-auto`}>
             {msg.role === 'ai' && (
               <div className="flex items-center gap-2 mb-2 pl-1">
                 <div className="size-8 rounded-full bg-white/10 border border-white/20 flex items-center justify-center shadow-md overflow-hidden">
@@ -891,14 +905,16 @@ function ProblemChat({ checklists, setChecklists }: { checklists: string[], setC
                 {msg.content}
               </div>
             ) : (
-              <div className="text-[15px] w-full text-card-foreground pl-11">
-                <div dangerouslySetInnerHTML={{ __html: msg.content.replace(/\*\*(.*?)\*\*/g, '<strong class="text-foreground">$1</strong>') }} className="leading-relaxed text-muted-foreground whitespace-pre-wrap text-[15px]" />
+              <div className="text-[15px] w-full text-card-foreground flex flex-col items-start">
+                <div className="bg-muted/30 border border-border/50 text-foreground px-5 py-3 rounded-3xl rounded-tl-sm text-[15px] shadow-sm max-w-[90%] ml-11">
+                  <div dangerouslySetInnerHTML={{ __html: msg.content.replace(/\*\*(.*?)\*\*/g, '<strong class="text-foreground">$1</strong>') }} className="leading-relaxed text-muted-foreground whitespace-pre-wrap text-[15px]" />
+                </div>
 
                 {/* INTERMITTENT CALL DROPS (KANDY) */}
                 {msg.type === 'initial-analysis-deep' && (
                   <div className="mt-6 relative border-l border-border/50 ml-5 pl-10 space-y-8 pb-4">
                     <div className="relative">
-                      <div className="absolute -left-[61px] top-1 size-10 rounded-full bg-background border-[3px] border-primary text-primary flex items-center justify-center font-black text-lg shadow-sm">1</div>
+                      <div className="absolute -left-[53px] top-1.5 size-6 rounded-full bg-muted border border-border/60 flex items-center justify-center text-xs font-bold text-muted-foreground shadow-sm">1</div>
                       <Card className="bg-background border-border/60 shadow-sm hover:border-primary/50 transition-colors">
                         <CardHeader className="py-4 px-5 border-b border-border/40 bg-muted/20 flex flex-row items-center justify-between">
                           <div>
@@ -926,7 +942,7 @@ function ProblemChat({ checklists, setChecklists }: { checklists: string[], setC
                     </div>
 
                     <div className="relative">
-                      <div className="absolute -left-[61px] top-1 size-10 rounded-full bg-background border-[3px] border-primary text-primary flex items-center justify-center font-black text-lg shadow-sm">2</div>
+                      <div className="absolute -left-[53px] top-1.5 size-6 rounded-full bg-muted border border-border/60 flex items-center justify-center text-xs font-bold text-muted-foreground shadow-sm">2</div>
                       <Card className="bg-background border-border/60 shadow-sm hover:border-primary/50 transition-colors">
                         <CardHeader className="py-4 px-5 border-b border-border/40 bg-muted/20 flex flex-row items-center justify-between">
                           <div>
@@ -959,7 +975,7 @@ function ProblemChat({ checklists, setChecklists }: { checklists: string[], setC
                     </div>
 
                     <div className="relative">
-                      <div className="absolute -left-[61px] top-1 size-10 rounded-full bg-background border-[3px] border-primary text-primary flex items-center justify-center font-black text-lg shadow-sm">3</div>
+                      <div className="absolute -left-[53px] top-1.5 size-6 rounded-full bg-muted border border-border/60 flex items-center justify-center text-xs font-bold text-muted-foreground shadow-sm">3</div>
                       <Card className="bg-background border-border/60 shadow-sm hover:border-primary/50 transition-colors">
                         <CardHeader className="py-4 px-5 border-b border-border/40 bg-muted/20 flex flex-row items-center justify-between">
                           <div>
@@ -988,7 +1004,7 @@ function ProblemChat({ checklists, setChecklists }: { checklists: string[], setC
                     </div>
 
                     <div className="relative">
-                      <div className="absolute -left-[61px] top-1 size-10 rounded-full bg-background border-[3px] border-primary text-primary flex items-center justify-center font-black text-lg shadow-sm">4</div>
+                      <div className="absolute -left-[53px] top-1.5 size-6 rounded-full bg-muted border border-border/60 flex items-center justify-center text-xs font-bold text-muted-foreground shadow-sm">4</div>
                       <Card className="bg-background border-border/60 shadow-sm hover:border-primary/50 transition-colors">
                         <CardHeader className="py-4 px-5 border-b border-border/40 bg-muted/20 flex flex-row items-center justify-between">
                           <div>
@@ -1378,7 +1394,7 @@ function ProblemChat({ checklists, setChecklists }: { checklists: string[], setC
                           </Button>
                         </CardHeader>
                         <CardContent className="p-6 space-y-5 text-[15px] leading-relaxed">
-                          <p dangerouslySetInnerHTML={{ __html: msg.content.replace(/\*\*(.*?)\*\*/g, '<strong class="text-foreground">$1</strong>') }} className="leading-relaxed text-muted-foreground text-[15px] whitespace-pre-wrap" />
+                          <div dangerouslySetInnerHTML={{ __html: msg.content.replace(/\*\*(.*?)\*\*/g, '<strong class="text-foreground">$1</strong>') }} className="leading-relaxed text-muted-foreground whitespace-pre-wrap text-[15px]" />
                           <div className="bg-background p-5 rounded-xl border border-border/80 shadow-sm mt-4">
                             <strong className="text-foreground flex items-center mb-3 text-lg"><CheckCircle2 className="size-5 mr-2 text-emerald-500" /> Automated Mitigation Protocol:</strong>
                             <ul className="list-disc pl-5 space-y-4 text-muted-foreground">
@@ -1417,7 +1433,7 @@ function ProblemChat({ checklists, setChecklists }: { checklists: string[], setC
                       <Search className="size-5 mr-2" /> Area Behavior Scan Result
                     </div>
                     <div className="p-6">
-                      <p dangerouslySetInnerHTML={{ __html: msg.content.replace(/\*\*(.*?)\*\*/g, '<strong class="text-foreground">$1</strong>') }} className="leading-relaxed text-muted-foreground text-[15px] whitespace-pre-wrap" />
+                      <div dangerouslySetInnerHTML={{ __html: msg.content.replace(/\*\*(.*?)\*\*/g, '<strong class="text-foreground">$1</strong>') }} className="leading-relaxed text-muted-foreground whitespace-pre-wrap text-[15px]" />
                     </div>
                   </div>
                 )}
@@ -1428,7 +1444,7 @@ function ProblemChat({ checklists, setChecklists }: { checklists: string[], setC
                       <Clock className="size-5 mr-2" /> Time Range Deep Dive Analysis
                     </div>
                     <div className="p-6">
-                      <p dangerouslySetInnerHTML={{ __html: msg.content.replace(/\*\*(.*?)\*\*/g, '<strong class="text-foreground">$1</strong>') }} className="leading-relaxed text-muted-foreground text-[15px] whitespace-pre-wrap" />
+                      <div dangerouslySetInnerHTML={{ __html: msg.content.replace(/\*\*(.*?)\*\*/g, '<strong class="text-foreground">$1</strong>') }} className="leading-relaxed text-muted-foreground whitespace-pre-wrap text-[15px]" />
                     </div>
                   </div>
                 )}
@@ -1519,14 +1535,14 @@ function ProblemChat({ checklists, setChecklists }: { checklists: string[], setC
         ))}
 
         {isTyping && (
-          <div className="flex flex-col gap-2 max-w-[80%] mr-auto">
+          <div className="flex flex-col gap-2 w-full max-w-3xl mx-auto">
             <div className="flex items-center gap-2 mb-1 pl-1">
               <div className="size-8 rounded-full bg-white/10 border border-white/20 flex items-center justify-center shadow-md overflow-hidden animate-spin">
                 <img src="/Bot.png" alt="Bot" className="size-full object-contain p-1" />
               </div>
               <span className="text-sm font-bold text-foreground">TeleQ Bot Specialist</span>
             </div>
-            <div className="bg-card border shadow-md p-5 rounded-2xl rounded-tl-sm w-32 space-y-3 ml-11">
+            <div className="bg-card border border-border/50 shadow-md p-5 rounded-3xl rounded-tl-sm w-32 space-y-3 ml-11">
               <div className="flex gap-1.5 items-center justify-center h-4">
                 <span className="size-2.5 rounded-full bg-muted-foreground/40 animate-bounce" style={{ animationDelay: '0ms' }} />
                 <span className="size-2.5 rounded-full bg-muted-foreground/40 animate-bounce" style={{ animationDelay: '150ms' }} />
