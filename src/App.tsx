@@ -194,7 +194,7 @@ const complaintsList = [
     source: "NOC Alert",
     priority: "Critical",
     priorityColor: "bg-red-500",
-    badgeColor: "bg-red-500/20 text-red-500 border-red-500/30",
+    badgeColor: "bg-background text-red-500 border-border/50",
     time: "10 mins ago",
     status: "Deep AI Analysis Complete"
   },
@@ -206,7 +206,7 @@ const complaintsList = [
     source: "Mobile App",
     priority: "High",
     priorityColor: "bg-orange-500",
-    badgeColor: "bg-orange-500/20 text-orange-400 border-orange-500/30",
+    badgeColor: "bg-background text-orange-400 border-border/50",
     time: "25 mins ago",
     status: "AI Analyzed"
   },
@@ -218,7 +218,7 @@ const complaintsList = [
     source: "Mobile App",
     priority: "Critical",
     priorityColor: "bg-purple-500",
-    badgeColor: "bg-purple-500/20 text-purple-400 border-purple-500/30",
+    badgeColor: "bg-background text-purple-400 border-border/50",
     time: "1 hr ago",
     status: "Deep AI Analysis Complete"
   },
@@ -230,7 +230,7 @@ const complaintsList = [
     source: "SMS",
     priority: "High",
     priorityColor: "bg-red-500",
-    badgeColor: "bg-red-500/20 text-red-400 border-red-500/30",
+    badgeColor: "bg-background text-red-400 border-border/50",
     time: "2 hrs ago",
     status: "Resolved"
   },
@@ -369,7 +369,7 @@ function RecentProblemsList() {
             value={chatInput}
             onChange={(e) => setChatInput(e.target.value)}
           />
-          <div className="bg-white p-1 rounded-full flex shrink-0 items-center justify-center size-8 mr-2 shadow-[0_0_10px_rgba(255,255,255,0.2)]">
+          <div className="bg-white p-1 rounded-full flex shrink-0 items-center justify-center size-8 mr-2 shadow-sm">
             <img src="/Bot.png" className="size-full object-contain" />
           </div>
         </div>
@@ -664,7 +664,7 @@ function ProblemChat({ checklists, setChecklists }: { checklists: string[], setC
         source: "System Auto-Detect",
         priority: hidden.severity,
         priorityColor: hidden.severity === 'Critical' ? 'bg-red-500' : hidden.severity === 'High' ? 'bg-orange-500' : 'bg-blue-500',
-        badgeColor: hidden.severity === 'Critical' ? 'bg-red-500/20 text-red-500 border-red-500/30' : hidden.severity === 'High' ? 'bg-orange-500/20 text-orange-500 border-orange-500/30' : 'bg-blue-500/20 text-blue-500 border-blue-500/30',
+        badgeColor: hidden.severity === 'Critical' ? 'bg-background text-red-500 border-border/50' : hidden.severity === 'High' ? 'bg-background text-orange-500 border-border/50' : 'bg-background text-blue-500 border-border/50',
         time: hidden.detected,
         status: "Latent Anomaly"
       };
@@ -679,7 +679,7 @@ function ProblemChat({ checklists, setChecklists }: { checklists: string[], setC
       source: "Manual",
       priority: "High",
       priorityColor: "bg-orange-500",
-      badgeColor: "bg-orange-500/20 text-orange-500 border-orange-500/30",
+      badgeColor: "bg-background text-orange-500 border-border/50",
       time: "Just now",
       status: "AI Analyzing"
     };
@@ -851,11 +851,11 @@ function ProblemChat({ checklists, setChecklists }: { checklists: string[], setC
               </p>
             </div>
             <div className="p-5 border-t border-border/50 bg-muted/10 flex flex-col gap-3">
-              <Button variant="outline" className="w-full text-blue-500 border-blue-500/30 hover:bg-blue-500/10 h-11 justify-start px-4 shadow-sm" onClick={() => {
+              <Button variant="outline" className="w-full text-blue-500 border-border/50 hover:bg-background h-11 justify-start px-4 shadow-sm" onClick={() => {
                 setDialogData(null);
                 handleSendMessage("Forwarded the generated translations to the Level 2 Customer Care team for manual review and dispatch.");
               }}>
-                <div className="size-8 rounded-full bg-blue-500/10 flex items-center justify-center mr-3"><MessageSquare className="size-4" /></div>
+                <div className="size-8 rounded-full bg-background flex items-center justify-center mr-3"><MessageSquare className="size-4" /></div>
                 Forward to Customer Care Review
               </Button>
               <Button className="w-full bg-emerald-600 hover:bg-emerald-700 text-white h-11 justify-start px-4 shadow-sm" onClick={() => {
@@ -896,14 +896,14 @@ function ProblemChat({ checklists, setChecklists }: { checklists: string[], setC
 
                 {/* INTERMITTENT CALL DROPS (KANDY) */}
                 {msg.type === 'initial-analysis-deep' && (
-                  <div className="mt-10 relative border-l-2 border-border ml-5 pl-10 space-y-12 pb-4">
+                  <div className="mt-6 relative border-l border-border/50 ml-5 pl-10 space-y-8 pb-4">
                     <div className="relative">
                       <div className="absolute -left-[61px] top-1 size-10 rounded-full bg-background border-[3px] border-primary text-primary flex items-center justify-center font-black text-lg shadow-sm">1</div>
                       <Card className="bg-background border-border/60 shadow-sm hover:border-primary/50 transition-colors">
                         <CardHeader className="py-4 px-5 border-b border-border/40 bg-muted/20 flex flex-row items-center justify-between">
                           <div>
-                            <Badge variant="outline" className="mb-2 text-[10px] uppercase tracking-wider text-blue-500 border-blue-500/30 font-bold bg-blue-500/5">Topic: Spatial Triangulation</Badge>
-                            <CardTitle className="text-lg flex items-center"><MapIcon className="size-5 mr-2 text-blue-500" /> Interactive GIS Coverage Map</CardTitle>
+                            <Badge variant="outline" className="mb-2 text-[10px] uppercase tracking-wider text-blue-500 border-border/50 font-bold bg-background">Topic: Spatial Triangulation</Badge>
+                            <CardTitle className="text-lg flex items-center text-foreground"><MapIcon className="size-4 mr-2 text-muted-foreground" /> Interactive GIS Coverage Map</CardTitle>
                           </div>
                           <Button variant="secondary" size="sm" className="h-8 shadow-sm hover:bg-primary hover:text-primary-foreground" onClick={() => handleReferenceStep(1, 'Interactive GIS Map')}>
                             <Reply className="size-4 mr-1.5" /> Ask About This
@@ -930,8 +930,8 @@ function ProblemChat({ checklists, setChecklists }: { checklists: string[], setC
                       <Card className="bg-background border-border/60 shadow-sm hover:border-primary/50 transition-colors">
                         <CardHeader className="py-4 px-5 border-b border-border/40 bg-muted/20 flex flex-row items-center justify-between">
                           <div>
-                            <Badge variant="outline" className="mb-2 text-[10px] uppercase tracking-wider text-indigo-500 border-indigo-500/30 font-bold bg-indigo-500/5">Topic: RF Diagnostics</Badge>
-                            <CardTitle className="text-lg flex items-center"><Activity className="size-5 mr-2 text-indigo-500" /> Air Interface Analysis</CardTitle>
+                            <Badge variant="outline" className="mb-2 text-[10px] uppercase tracking-wider text-indigo-500 border-border/50 font-bold bg-background">Topic: RF Diagnostics</Badge>
+                            <CardTitle className="text-lg flex items-center text-foreground"><Activity className="size-4 mr-2 text-muted-foreground" /> Air Interface Analysis</CardTitle>
                           </div>
 
                           <Button variant="secondary" size="sm" className="h-8 shadow-sm hover:bg-primary hover:text-primary-foreground" onClick={() => handleReferenceStep(2, 'Air Interface Analysis')}>
@@ -963,8 +963,8 @@ function ProblemChat({ checklists, setChecklists }: { checklists: string[], setC
                       <Card className="bg-background border-border/60 shadow-sm hover:border-primary/50 transition-colors">
                         <CardHeader className="py-4 px-5 border-b border-border/40 bg-muted/20 flex flex-row items-center justify-between">
                           <div>
-                            <Badge variant="outline" className="mb-2 text-[10px] uppercase tracking-wider text-orange-500 border-orange-500/30 font-bold bg-orange-500/5">Topic: NOC Logs</Badge>
-                            <CardTitle className="text-lg flex items-center"><AlertCircle className="size-5 mr-2 text-orange-500" /> Hardware Alarm Correlation</CardTitle>
+                            <Badge variant="outline" className="mb-2 text-[10px] uppercase tracking-wider text-orange-500 border-border/50 font-bold bg-background">Topic: NOC Logs</Badge>
+                            <CardTitle className="text-lg flex items-center text-foreground"><AlertCircle className="size-4 mr-2 text-muted-foreground" /> Hardware Alarm Correlation</CardTitle>
                           </div>
 
                           <Button variant="secondary" size="sm" className="h-8 shadow-sm hover:bg-primary hover:text-primary-foreground" onClick={() => handleReferenceStep(3, 'Hardware Alarm Correlation')}>
@@ -979,7 +979,7 @@ function ProblemChat({ checklists, setChecklists }: { checklists: string[], setC
                               </thead>
                               <tbody>
                                 <tr className="border-b border-border/50"><td className="p-3 text-muted-foreground">14:15</td><td className="p-3 font-mono text-muted-foreground">LINK_OAM_FAIL</td><td className="p-3 text-blue-500 font-medium">Warning</td></tr>
-                                <tr className="bg-orange-500/5"><td className="p-3 text-muted-foreground">14:55</td><td className="p-3 font-mono font-bold text-orange-500">TRX_VSWR_LIMIT_EXCEEDED</td><td className="p-3"><Badge variant="outline" className="bg-orange-500/10 border-orange-500/30 text-orange-500">Minor</Badge></td></tr>
+                                <tr className="bg-background"><td className="p-3 text-muted-foreground">14:55</td><td className="p-3 font-mono font-bold text-orange-500">TRX_VSWR_LIMIT_EXCEEDED</td><td className="p-3"><Badge variant="outline" className="bg-background border-border/50 text-orange-500">Minor</Badge></td></tr>
                               </tbody>
                             </table>
                           </div>
@@ -992,7 +992,7 @@ function ProblemChat({ checklists, setChecklists }: { checklists: string[], setC
                       <Card className="bg-background border-border/60 shadow-sm hover:border-primary/50 transition-colors">
                         <CardHeader className="py-4 px-5 border-b border-border/40 bg-muted/20 flex flex-row items-center justify-between">
                           <div>
-                            <Badge variant="outline" className="mb-2 text-[10px] uppercase tracking-wider text-purple-500 border-purple-500/30 font-bold bg-purple-500/5">Topic: Mathematics</Badge>
+                            <Badge variant="outline" className="mb-2 text-[10px] uppercase tracking-wider text-purple-500 border-border/50 font-bold bg-background">Topic: Mathematics</Badge>
                             <CardTitle className="text-lg flex items-center text-primary"><Zap className="size-5 mr-2 text-primary" /> Interactive Erlang B Capacity</CardTitle>
                           </div>
 
@@ -1007,8 +1007,8 @@ function ProblemChat({ checklists, setChecklists }: { checklists: string[], setC
                     </div>
 
                     <div className="relative">
-                      <div className="absolute -left-[61px] top-1 size-10 rounded-full bg-primary border-[3px] border-primary text-primary-foreground flex items-center justify-center font-black text-lg shadow-[0_0_20px_rgba(var(--primary),0.5)]">5</div>
-                      <Card className="bg-primary/5 border-primary/40 shadow-[0_0_30px_rgba(var(--primary),0.15)] ring-1 ring-primary/30">
+                      <div className="absolute -left-[61px] top-1 size-10 rounded-full bg-primary border-[3px] border-primary text-primary-foreground flex items-center justify-center font-black text-lg shadow-sm">5</div>
+                      <Card className="bg-primary/5 border-primary/40 shadow-sm ">
                         <CardHeader className="py-4 px-5 border-b border-primary/20 bg-primary/10 flex flex-row items-center justify-between">
                           <div>
                             <Badge className="mb-2 text-[10px] uppercase tracking-wider bg-primary text-primary-foreground">AI Synthesis</Badge>
@@ -1046,14 +1046,14 @@ function ProblemChat({ checklists, setChecklists }: { checklists: string[], setC
 
                 {/* POWER FAILURE (GAMPOLA) */}
                 {msg.type === 'initial-analysis-power' && (
-                  <div className="mt-10 relative border-l-2 border-border ml-5 pl-10 space-y-12 pb-4">
+                  <div className="mt-6 relative border-l border-border/50 ml-5 pl-10 space-y-8 pb-4">
                     <div className="relative">
-                      <div className="absolute -left-[61px] top-1 size-10 rounded-full bg-background border-[3px] border-red-500 text-red-500 flex items-center justify-center font-black text-lg shadow-sm">1</div>
-                      <Card className="bg-background border-border/60 shadow-sm hover:border-red-500/50 transition-colors">
+                      <div className="absolute -left-[53px] top-1.5 size-6 rounded-full bg-muted border border-border/60 flex items-center justify-center text-xs font-bold text-muted-foreground shadow-sm">1</div>
+                      <Card className="bg-background border-border/60 shadow-sm hover:border-border/50 transition-colors">
                         <CardHeader className="py-4 px-5 border-b border-border/40 bg-muted/20 flex flex-row items-center justify-between">
                           <div>
-                            <Badge variant="outline" className="mb-2 text-[10px] uppercase tracking-wider text-blue-500 border-blue-500/30 font-bold bg-blue-500/5">Topic: Spatial Triangulation</Badge>
-                            <CardTitle className="text-lg flex items-center"><MapIcon className="size-5 mr-2 text-blue-500" /> Location Triangulation</CardTitle>
+                            <Badge variant="outline" className="mb-2 text-[10px] uppercase tracking-wider text-blue-500 border-border/50 font-bold bg-background">Topic: Spatial Triangulation</Badge>
+                            <CardTitle className="text-lg flex items-center text-foreground"><MapIcon className="size-4 mr-2 text-muted-foreground" /> Location Triangulation</CardTitle>
                           </div>
 
                           <Button variant="secondary" size="sm" className="h-8 shadow-sm hover:bg-primary hover:text-primary-foreground" onClick={() => handleReferenceStep(1, 'Location Triangulation')}>
@@ -1073,12 +1073,12 @@ function ProblemChat({ checklists, setChecklists }: { checklists: string[], setC
                     </div>
 
                     <div className="relative">
-                      <div className="absolute -left-[61px] top-1 size-10 rounded-full bg-background border-[3px] border-red-500 text-red-500 flex items-center justify-center font-black text-lg shadow-sm">2</div>
-                      <Card className="bg-background border-border/60 shadow-sm hover:border-red-500/50 transition-colors">
+                      <div className="absolute -left-[53px] top-1.5 size-6 rounded-full bg-muted border border-border/60 flex items-center justify-center text-xs font-bold text-muted-foreground shadow-sm">2</div>
+                      <Card className="bg-background border-border/60 shadow-sm hover:border-border/50 transition-colors">
                         <CardHeader className="py-4 px-5 border-b border-border/40 bg-muted/20 flex flex-row items-center justify-between">
                           <div>
-                            <Badge variant="outline" className="mb-2 text-[10px] uppercase tracking-wider text-orange-500 border-orange-500/30 font-bold bg-orange-500/5">Topic: NOC Logs</Badge>
-                            <CardTitle className="text-lg flex items-center"><AlertCircle className="size-5 mr-2 text-orange-500" /> Active Alarm Check</CardTitle>
+                            <Badge variant="outline" className="mb-2 text-[10px] uppercase tracking-wider text-orange-500 border-border/50 font-bold bg-background">Topic: NOC Logs</Badge>
+                            <CardTitle className="text-lg flex items-center text-foreground"><AlertCircle className="size-4 mr-2 text-muted-foreground" /> Active Alarm Check</CardTitle>
                           </div>
 
                           <Button variant="secondary" size="sm" className="h-8 shadow-sm hover:bg-primary hover:text-primary-foreground" onClick={() => handleReferenceStep(2, 'Active Alarm Check')}>
@@ -1087,14 +1087,14 @@ function ProblemChat({ checklists, setChecklists }: { checklists: string[], setC
                         </CardHeader>
                         <CardContent className="p-5">
                           <div className="flex flex-col gap-3">
-                            <div className="bg-red-500/10 border border-red-500/20 p-5 rounded-xl flex items-center shadow-sm">
+                            <div className="bg-background border border-border/50 p-5 rounded-xl flex items-center shadow-sm">
                               <AlertTriangle className="size-7 text-red-500 mr-4" />
                               <div>
                                 <div className="font-mono font-bold text-red-500 text-base">MAINS_FAILURE</div>
                                 <div className="text-sm text-red-400 mt-1">Triggered at 08:45 AM</div>
                               </div>
                             </div>
-                            <div className="bg-red-500/10 border border-red-500/20 p-5 rounded-xl flex items-center shadow-sm">
+                            <div className="bg-background border border-border/50 p-5 rounded-xl flex items-center shadow-sm">
                               <AlertTriangle className="size-7 text-red-500 mr-4" />
                               <div>
                                 <div className="font-mono font-bold text-red-500 text-base">BATTERY_DEPLETED</div>
@@ -1107,12 +1107,12 @@ function ProblemChat({ checklists, setChecklists }: { checklists: string[], setC
                     </div>
 
                     <div className="relative">
-                      <div className="absolute -left-[61px] top-1 size-10 rounded-full bg-red-500 border-[3px] border-red-500 text-white flex items-center justify-center font-black text-lg shadow-[0_0_20px_rgba(239,68,68,0.5)]">3</div>
-                      <Card className="bg-red-500/5 border-red-500/40 shadow-[0_0_30px_rgba(239,68,68,0.15)] ring-1 ring-red-500/30">
-                        <CardHeader className="py-4 px-5 border-b border-red-500/20 bg-red-500/10 flex flex-row items-center justify-between">
+                      <div className="absolute -left-[61px] top-1 size-10 rounded-full bg-red-500 border-[3px] border-red-500 text-white flex items-center justify-center font-black text-lg shadow-sm">3</div>
+                      <Card className="bg-background border-border/50 shadow-sm ">
+                        <CardHeader className="py-4 px-5 border-b border-border/50 bg-background flex flex-row items-center justify-between">
                           <div>
                             <Badge className="mb-2 text-[10px] uppercase tracking-wider bg-red-500 text-white hover:bg-red-600">AI Synthesis</Badge>
-                            <CardTitle className="text-xl flex items-center text-red-500"><Lightbulb className="size-6 mr-2" /> Final Diagnosis & Action Plan</CardTitle>
+                            <CardTitle className="text-lg flex items-center text-foreground"><Lightbulb className="size-4 mr-2 text-muted-foreground" /> Final Diagnosis & Action Plan</CardTitle>
                           </div>
 
                           <Button variant="secondary" size="sm" className="h-8 shadow-sm hover:bg-primary hover:text-primary-foreground" onClick={() => handleReferenceStep(3, 'Final Diagnosis & Action Plan')}>
@@ -1132,7 +1132,7 @@ function ProblemChat({ checklists, setChecklists }: { checklists: string[], setC
                               <li><strong>Customer Feedback:</strong> Generate SMS to inform users in the area about the power failure.</li>
                               <li className="flex flex-col items-start gap-3">
                                 <span><strong>Mitigation Action:</strong> Alert Regional Power Team and CEB (Ceylon Electricity Board). Dispatch a mobile backup generator.</span>
-                                <Button size="sm" variant="outline" className="bg-red-500/10 border-red-500/30 text-red-500 hover:bg-red-500/20 h-8 shadow-sm" onClick={() => addToChecklist("Dispatch Mobile Generator to Gampola-South_Site_04")}>
+                                <Button size="sm" variant="outline" className="bg-background border-border/50 text-red-500 hover:bg-background h-8 shadow-sm" onClick={() => addToChecklist("Dispatch Mobile Generator to Gampola-South_Site_04")}>
                                   <ClipboardList className="size-4 mr-2" /> Add to Investigation Checklist
                                 </Button>
                               </li>
@@ -1146,14 +1146,14 @@ function ProblemChat({ checklists, setChecklists }: { checklists: string[], setC
 
                 {/* BACKHAUL FAILURE (NUWARA ELIYA) */}
                 {msg.type === 'initial-analysis-backhaul' && (
-                  <div className="mt-10 relative border-l-2 border-border ml-5 pl-10 space-y-12 pb-4">
+                  <div className="mt-6 relative border-l border-border/50 ml-5 pl-10 space-y-8 pb-4">
                     <div className="relative">
-                      <div className="absolute -left-[61px] top-1 size-10 rounded-full bg-background border-[3px] border-orange-500 text-orange-500 flex items-center justify-center font-black text-lg shadow-sm">1</div>
-                      <Card className="bg-background border-border/60 shadow-sm hover:border-orange-500/50 transition-colors">
+                      <div className="absolute -left-[53px] top-1.5 size-6 rounded-full bg-muted border border-border/60 flex items-center justify-center text-xs font-bold text-muted-foreground shadow-sm">1</div>
+                      <Card className="bg-background border-border/60 shadow-sm hover:border-border/50 transition-colors">
                         <CardHeader className="py-4 px-5 border-b border-border/40 bg-muted/20 flex flex-row items-center justify-between">
                           <div>
-                            <Badge variant="outline" className="mb-2 text-[10px] uppercase tracking-wider text-blue-500 border-blue-500/30 font-bold bg-blue-500/5">Topic: Spatial Triangulation</Badge>
-                            <CardTitle className="text-lg flex items-center"><MapIcon className="size-5 mr-2 text-blue-500" /> Location Triangulation</CardTitle>
+                            <Badge variant="outline" className="mb-2 text-[10px] uppercase tracking-wider text-blue-500 border-border/50 font-bold bg-background">Topic: Spatial Triangulation</Badge>
+                            <CardTitle className="text-lg flex items-center text-foreground"><MapIcon className="size-4 mr-2 text-muted-foreground" /> Location Triangulation</CardTitle>
                           </div>
 
                           <Button variant="secondary" size="sm" className="h-8 shadow-sm hover:bg-primary hover:text-primary-foreground" onClick={() => handleReferenceStep(1, 'Location Triangulation')}>
@@ -1172,12 +1172,12 @@ function ProblemChat({ checklists, setChecklists }: { checklists: string[], setC
                       </Card>
                     </div>
                     <div className="relative">
-                      <div className="absolute -left-[61px] top-1 size-10 rounded-full bg-background border-[3px] border-orange-500 text-orange-500 flex items-center justify-center font-black text-lg shadow-sm">2</div>
-                      <Card className="bg-background border-border/60 shadow-sm hover:border-orange-500/50 transition-colors">
+                      <div className="absolute -left-[53px] top-1.5 size-6 rounded-full bg-muted border border-border/60 flex items-center justify-center text-xs font-bold text-muted-foreground shadow-sm">2</div>
+                      <Card className="bg-background border-border/60 shadow-sm hover:border-border/50 transition-colors">
                         <CardHeader className="py-4 px-5 border-b border-border/40 bg-muted/20 flex flex-row items-center justify-between">
                           <div>
-                            <Badge variant="outline" className="mb-2 text-[10px] uppercase tracking-wider text-orange-500 border-orange-500/30 font-bold bg-orange-500/5">Topic: Transmission Network</Badge>
-                            <CardTitle className="text-lg flex items-center"><Activity className="size-5 mr-2 text-orange-500" /> Microwave Backhaul Telemetry</CardTitle>
+                            <Badge variant="outline" className="mb-2 text-[10px] uppercase tracking-wider text-orange-500 border-border/50 font-bold bg-background">Topic: Transmission Network</Badge>
+                            <CardTitle className="text-lg flex items-center text-foreground"><Activity className="size-4 mr-2 text-muted-foreground" /> Microwave Backhaul Telemetry</CardTitle>
                           </div>
 
                           <Button variant="secondary" size="sm" className="h-8 shadow-sm hover:bg-primary hover:text-primary-foreground" onClick={() => handleReferenceStep(2, 'Microwave Backhaul Telemetry')}>
@@ -1191,12 +1191,12 @@ function ProblemChat({ checklists, setChecklists }: { checklists: string[], setC
                       </Card>
                     </div>
                     <div className="relative">
-                      <div className="absolute -left-[61px] top-1 size-10 rounded-full bg-background border-[3px] border-orange-500 text-orange-500 flex items-center justify-center font-black text-lg shadow-sm">3</div>
-                      <Card className="bg-background border-border/60 shadow-sm hover:border-orange-500/50 transition-colors">
+                      <div className="absolute -left-[53px] top-1.5 size-6 rounded-full bg-muted border border-border/60 flex items-center justify-center text-xs font-bold text-muted-foreground shadow-sm">3</div>
+                      <Card className="bg-background border-border/60 shadow-sm hover:border-border/50 transition-colors">
                         <CardHeader className="py-4 px-5 border-b border-border/40 bg-muted/20 flex flex-row items-center justify-between">
                           <div>
-                            <Badge variant="outline" className="mb-2 text-[10px] uppercase tracking-wider text-cyan-500 border-cyan-500/30 font-bold bg-cyan-500/5">Topic: Environmental API Correlation</Badge>
-                            <CardTitle className="text-lg flex items-center"><CloudRain className="size-5 mr-2 text-cyan-500" /> Weather Impact Analysis</CardTitle>
+                            <Badge variant="outline" className="mb-2 text-[10px] uppercase tracking-wider text-cyan-500 border-border/50 font-bold bg-background">Topic: Environmental API Correlation</Badge>
+                            <CardTitle className="text-lg flex items-center text-foreground"><CloudRain className="size-4 mr-2 text-muted-foreground" /> Weather Impact Analysis</CardTitle>
                           </div>
 
                           <Button variant="secondary" size="sm" className="h-8 shadow-sm hover:bg-primary hover:text-primary-foreground" onClick={() => handleReferenceStep(3, 'Weather Impact Analysis')}>
@@ -1212,12 +1212,12 @@ function ProblemChat({ checklists, setChecklists }: { checklists: string[], setC
                       </Card>
                     </div>
                     <div className="relative">
-                      <div className="absolute -left-[61px] top-1 size-10 rounded-full bg-orange-500 border-[3px] border-orange-500 text-white flex items-center justify-center font-black text-lg shadow-[0_0_20px_rgba(249,115,22,0.5)]">4</div>
-                      <Card className="bg-orange-500/5 border-orange-500/40 shadow-[0_0_30px_rgba(249,115,22,0.15)] ring-1 ring-orange-500/30">
-                        <CardHeader className="py-4 px-5 border-b border-orange-500/20 bg-orange-500/10 flex flex-row items-center justify-between">
+                      <div className="absolute -left-[53px] top-1.5 size-6 rounded-full bg-primary border-none flex items-center justify-center text-xs font-bold text-primary-foreground shadow-sm">4</div>
+                      <Card className="bg-background border-border/50 shadow-sm ">
+                        <CardHeader className="py-4 px-5 border-b border-border/50 bg-background flex flex-row items-center justify-between">
                           <div>
                             <Badge className="mb-2 text-[10px] uppercase tracking-wider bg-orange-500 text-white hover:bg-orange-600">AI Synthesis</Badge>
-                            <CardTitle className="text-xl flex items-center text-orange-500"><Lightbulb className="size-6 mr-2" /> Final Diagnosis & Action Plan</CardTitle>
+                            <CardTitle className="text-lg flex items-center text-foreground"><Lightbulb className="size-4 mr-2 text-muted-foreground" /> Final Diagnosis & Action Plan</CardTitle>
                           </div>
 
                           <Button variant="secondary" size="sm" className="h-8 shadow-sm hover:bg-primary hover:text-primary-foreground" onClick={() => handleReferenceStep(4, 'Final Diagnosis & Action Plan')}>
@@ -1237,7 +1237,7 @@ function ProblemChat({ checklists, setChecklists }: { checklists: string[], setC
                               <li><strong>Customer Feedback:</strong> Generate SMS to inform users in the area about the degraded throughput due to weather.</li>
                               <li className="flex flex-col items-start gap-3">
                                 <span><strong>Mitigation Action:</strong> Coordinate with NOC to manually failover traffic to the secondary low-frequency (7GHz) backup microwave link.</span>
-                                <Button size="sm" variant="outline" className="bg-orange-500/10 border-orange-500/30 text-orange-500 hover:bg-orange-500/20 h-8 shadow-sm" onClick={() => addToChecklist("NOC Coordination: Failover to 7GHz Link")}>
+                                <Button size="sm" variant="outline" className="bg-background border-border/50 text-orange-500 hover:bg-background h-8 shadow-sm" onClick={() => addToChecklist("NOC Coordination: Failover to 7GHz Link")}>
                                   <ClipboardList className="size-4 mr-2" /> Add to Investigation Checklist
                                 </Button>
                               </li>
@@ -1251,14 +1251,14 @@ function ProblemChat({ checklists, setChecklists }: { checklists: string[], setC
 
                 {/* CORE NETWORK (PERADENIYA) */}
                 {msg.type === 'initial-analysis-core' && (
-                  <div className="mt-10 relative border-l-2 border-border ml-5 pl-10 space-y-12 pb-4">
+                  <div className="mt-6 relative border-l border-border/50 ml-5 pl-10 space-y-8 pb-4">
                     <div className="relative">
-                      <div className="absolute -left-[61px] top-1 size-10 rounded-full bg-background border-[3px] border-red-500 text-red-500 flex items-center justify-center font-black text-lg shadow-sm">1</div>
-                      <Card className="bg-background border-border/60 shadow-sm hover:border-red-500/50 transition-colors">
+                      <div className="absolute -left-[53px] top-1.5 size-6 rounded-full bg-muted border border-border/60 flex items-center justify-center text-xs font-bold text-muted-foreground shadow-sm">1</div>
+                      <Card className="bg-background border-border/60 shadow-sm hover:border-border/50 transition-colors">
                         <CardHeader className="py-4 px-5 border-b border-border/40 bg-muted/20 flex flex-row items-center justify-between">
                           <div>
-                            <Badge variant="outline" className="mb-2 text-[10px] uppercase tracking-wider text-purple-500 border-purple-500/30 font-bold bg-purple-500/5">Topic: Signaling Trace</Badge>
-                            <CardTitle className="text-lg flex items-center"><ServerCrash className="size-5 mr-2 text-purple-500" /> S1-MME Interface Analysis</CardTitle>
+                            <Badge variant="outline" className="mb-2 text-[10px] uppercase tracking-wider text-purple-500 border-border/50 font-bold bg-background">Topic: Signaling Trace</Badge>
+                            <CardTitle className="text-lg flex items-center text-foreground"><ServerCrash className="size-4 mr-2 text-muted-foreground" /> S1-MME Interface Analysis</CardTitle>
                           </div>
 
                           <Button variant="secondary" size="sm" className="h-8 shadow-sm hover:bg-primary hover:text-primary-foreground" onClick={() => handleReferenceStep(1, 'S1-MME Interface Analysis')}>
@@ -1272,12 +1272,12 @@ function ProblemChat({ checklists, setChecklists }: { checklists: string[], setC
                       </Card>
                     </div>
                     <div className="relative">
-                      <div className="absolute -left-[61px] top-1 size-10 rounded-full bg-background border-[3px] border-red-500 text-red-500 flex items-center justify-center font-black text-lg shadow-sm">2</div>
-                      <Card className="bg-background border-border/60 shadow-sm hover:border-red-500/50 transition-colors">
+                      <div className="absolute -left-[53px] top-1.5 size-6 rounded-full bg-muted border border-border/60 flex items-center justify-center text-xs font-bold text-muted-foreground shadow-sm">2</div>
+                      <Card className="bg-background border-border/60 shadow-sm hover:border-border/50 transition-colors">
                         <CardHeader className="py-4 px-5 border-b border-border/40 bg-muted/20 flex flex-row items-center justify-between">
                           <div>
-                            <Badge variant="outline" className="mb-2 text-[10px] uppercase tracking-wider text-red-500 border-red-500/30 font-bold bg-red-500/5">Topic: Core DB Logs</Badge>
-                            <CardTitle className="text-lg flex items-center"><Database className="size-5 mr-2 text-red-500" /> HSS (Home Subscriber Server) Log Correlation</CardTitle>
+                            <Badge variant="outline" className="mb-2 text-[10px] uppercase tracking-wider text-red-500 border-border/50 font-bold bg-background">Topic: Core DB Logs</Badge>
+                            <CardTitle className="text-lg flex items-center text-foreground"><Database className="size-4 mr-2 text-muted-foreground" /> HSS (Home Subscriber Server) Log Correlation</CardTitle>
                           </div>
 
                           <Button variant="secondary" size="sm" className="h-8 shadow-sm hover:bg-primary hover:text-primary-foreground" onClick={() => handleReferenceStep(2, 'HSS (Home Subscriber Server) Log Correlation')}>
@@ -1298,12 +1298,12 @@ function ProblemChat({ checklists, setChecklists }: { checklists: string[], setC
                       </Card>
                     </div>
                     <div className="relative">
-                      <div className="absolute -left-[61px] top-1 size-10 rounded-full bg-red-500 border-[3px] border-red-500 text-white flex items-center justify-center font-black text-lg shadow-[0_0_20px_rgba(239,68,68,0.5)]">3</div>
-                      <Card className="bg-red-500/5 border-red-500/40 shadow-[0_0_30px_rgba(239,68,68,0.15)] ring-1 ring-red-500/30">
-                        <CardHeader className="py-4 px-5 border-b border-red-500/20 bg-red-500/10 flex flex-row items-center justify-between">
+                      <div className="absolute -left-[61px] top-1 size-10 rounded-full bg-red-500 border-[3px] border-red-500 text-white flex items-center justify-center font-black text-lg shadow-sm">3</div>
+                      <Card className="bg-background border-border/50 shadow-sm ">
+                        <CardHeader className="py-4 px-5 border-b border-border/50 bg-background flex flex-row items-center justify-between">
                           <div>
                             <Badge className="mb-2 text-[10px] uppercase tracking-wider bg-red-500 text-white hover:bg-red-600">AI Synthesis</Badge>
-                            <CardTitle className="text-xl flex items-center text-red-500"><Lightbulb className="size-6 mr-2" /> Final Diagnosis & Action Plan</CardTitle>
+                            <CardTitle className="text-lg flex items-center text-foreground"><Lightbulb className="size-4 mr-2 text-muted-foreground" /> Final Diagnosis & Action Plan</CardTitle>
                           </div>
 
                           <Button variant="secondary" size="sm" className="h-8 shadow-sm hover:bg-primary hover:text-primary-foreground" onClick={() => handleReferenceStep(3, 'Final Diagnosis & Action Plan')}>
@@ -1323,7 +1323,7 @@ function ProblemChat({ checklists, setChecklists }: { checklists: string[], setC
                               <li><strong>Customer Feedback:</strong> Generate SMS to inform users in the batch about the authentication delay.</li>
                               <li className="flex flex-col items-start gap-3">
                                 <span><strong>Mitigation Action:</strong> Escalate to Level 3 Core Operations team to manually isolate HSS_Node_B and verify DB integrity.</span>
-                                <Button size="sm" variant="outline" className="bg-red-500/10 border-red-500/30 text-red-500 hover:bg-red-500/20 h-8 shadow-sm" onClick={() => addToChecklist("L3 Core Ops: Verify HSS_Node_B DB Integrity")}>
+                                <Button size="sm" variant="outline" className="bg-background border-border/50 text-red-500 hover:bg-background h-8 shadow-sm" onClick={() => addToChecklist("L3 Core Ops: Verify HSS_Node_B DB Integrity")}>
                                   <ClipboardList className="size-4 mr-2" /> Add to Investigation Checklist
                                 </Button>
                               </li>
@@ -1337,14 +1337,14 @@ function ProblemChat({ checklists, setChecklists }: { checklists: string[], setC
 
                 {/* CUSTOM MANUAL INVESTIGATION (c-1005) */}
                 {msg.type === 'initial-analysis-custom' && (
-                  <div className="mt-10 relative border-l-2 border-border ml-5 pl-10 space-y-12 pb-4">
+                  <div className="mt-6 relative border-l border-border/50 ml-5 pl-10 space-y-8 pb-4">
                     <div className="relative">
-                      <div className="absolute -left-[61px] top-1 size-10 rounded-full bg-background border-[3px] border-orange-500 text-orange-500 flex items-center justify-center font-black text-lg shadow-sm">1</div>
-                      <Card className="bg-background border-border/60 shadow-sm hover:border-orange-500/50 transition-colors">
+                      <div className="absolute -left-[53px] top-1.5 size-6 rounded-full bg-muted border border-border/60 flex items-center justify-center text-xs font-bold text-muted-foreground shadow-sm">1</div>
+                      <Card className="bg-background border-border/60 shadow-sm hover:border-border/50 transition-colors">
                         <CardHeader className="py-4 px-5 border-b border-border/40 bg-muted/20 flex flex-row items-center justify-between">
                           <div>
-                            <Badge variant="outline" className="mb-2 text-[10px] uppercase tracking-wider text-orange-500 border-orange-500/30 font-bold bg-orange-500/5">Topic: Geolocation Scan</Badge>
-                            <CardTitle className="text-lg flex items-center"><MapPin className="size-5 mr-2 text-orange-500" /> Context Acquired</CardTitle>
+                            <Badge variant="outline" className="mb-2 text-[10px] uppercase tracking-wider text-orange-500 border-border/50 font-bold bg-background">Topic: Geolocation Scan</Badge>
+                            <CardTitle className="text-lg flex items-center text-foreground"><MapPin className="size-4 mr-2 text-muted-foreground" /> Context Acquired</CardTitle>
                           </div>
 
                           <Button variant="secondary" size="sm" className="h-8 shadow-sm hover:bg-primary hover:text-primary-foreground" onClick={() => handleReferenceStep(1, 'Context Acquired')}>
@@ -1361,16 +1361,16 @@ function ProblemChat({ checklists, setChecklists }: { checklists: string[], setC
 
                 {/* HIDDEN ANOMALIES */}
                 {msg.type === 'initial-analysis-hidden' && (
-                  <div className="mt-10 relative border-l-2 border-border ml-5 pl-10 space-y-12 pb-4">
+                  <div className="mt-6 relative border-l border-border/50 ml-5 pl-10 space-y-8 pb-4">
                     <div className="relative">
-                      <div className="absolute -left-[61px] top-1 size-10 rounded-full bg-background border-[3px] border-emerald-500 text-emerald-500 flex items-center justify-center shadow-sm">
+                      <div className="absolute -left-[53px] top-1.5 size-6 rounded-full bg-muted border border-border/60 flex items-center justify-center text-xs text-muted-foreground shadow-sm">
                         <Ghost className="size-5" />
                       </div>
-                      <Card className="bg-emerald-500/5 border-emerald-500/40 shadow-[0_0_30px_rgba(16,185,129,0.15)] hover:border-emerald-500/60 transition-colors">
-                        <CardHeader className="py-4 px-5 border-b border-emerald-500/20 bg-emerald-500/10 flex flex-row items-center justify-between">
+                      <Card className="bg-background border-border/50 shadow-sm hover:border-border/50 transition-colors">
+                        <CardHeader className="py-4 px-5 border-b border-border/50 bg-background flex flex-row items-center justify-between">
                           <div>
-                            <Badge className="mb-2 text-[10px] uppercase tracking-wider bg-emerald-500 text-white hover:bg-emerald-600 shadow-sm">Autonomous Detection</Badge>
-                            <CardTitle className="text-xl flex items-center text-emerald-500"><Activity className="size-6 mr-2" /> Latent Anomaly Analysis</CardTitle>
+                            
+                            <CardTitle className="text-lg flex items-center text-foreground"><Activity className="size-4 mr-2 text-muted-foreground" /> Latent Anomaly Analysis</CardTitle>
                           </div>
 
                           <Button variant="secondary" size="sm" className="h-8 shadow-sm hover:bg-primary hover:text-primary-foreground" onClick={() => handleReferenceStep(1, 'Latent Anomaly Analysis')}>
@@ -1384,7 +1384,7 @@ function ProblemChat({ checklists, setChecklists }: { checklists: string[], setC
                             <ul className="list-disc pl-5 space-y-4 text-muted-foreground">
                               <li className="flex flex-col items-start gap-3">
                                 <span><strong>Mitigation Action:</strong> Dispatch internal engineering ticket for physical site inspection or parameter tuning based on AI root cause.</span>
-                                <Button size="sm" variant="outline" className="bg-emerald-500/10 border-emerald-500/30 text-emerald-500 hover:bg-emerald-500/20 h-8 shadow-sm" onClick={() => addToChecklist("Engineering Ticket: Address Latent Anomaly")}>
+                                <Button size="sm" variant="outline" className="bg-background border-border/50 text-emerald-500 hover:bg-background h-8 shadow-sm" onClick={() => addToChecklist("Engineering Ticket: Address Latent Anomaly")}>
                                   <ClipboardList className="size-4 mr-2" /> Add to Investigation Checklist
                                 </Button>
                               </li>
@@ -1412,8 +1412,8 @@ function ProblemChat({ checklists, setChecklists }: { checklists: string[], setC
                 )}
 
                 {msg.type === 'area-analysis' && (
-                  <div className="mt-6 border border-blue-500/30 rounded-xl overflow-hidden bg-blue-500/5 shadow-lg">
-                    <div className="bg-blue-500/20 px-5 py-3 border-b border-blue-500/30 text-blue-500 font-bold flex items-center text-sm uppercase tracking-wider">
+                  <div className="mt-6 border border-border/50 rounded-xl overflow-hidden bg-background shadow-lg">
+                    <div className="bg-background px-5 py-3 border-b border-border/50 text-blue-500 font-bold flex items-center text-sm uppercase tracking-wider">
                       <Search className="size-5 mr-2" /> Area Behavior Scan Result
                     </div>
                     <div className="p-6">
@@ -1423,8 +1423,8 @@ function ProblemChat({ checklists, setChecklists }: { checklists: string[], setC
                 )}
 
                 {msg.type === 'time-analysis' && (
-                  <div className="mt-6 border border-purple-500/30 rounded-xl overflow-hidden bg-purple-500/5 shadow-lg">
-                    <div className="bg-purple-500/20 px-5 py-3 border-b border-purple-500/30 text-purple-500 font-bold flex items-center text-sm uppercase tracking-wider">
+                  <div className="mt-6 border border-border/50 rounded-xl overflow-hidden bg-background shadow-lg">
+                    <div className="bg-background px-5 py-3 border-b border-border/50 text-purple-500 font-bold flex items-center text-sm uppercase tracking-wider">
                       <Clock className="size-5 mr-2" /> Time Range Deep Dive Analysis
                     </div>
                     <div className="p-6">
@@ -1435,8 +1435,8 @@ function ProblemChat({ checklists, setChecklists }: { checklists: string[], setC
 
                 {msg.type === 'translations' && (
                   <div className="mt-8 grid gap-4">
-                    <Card className="bg-blue-500/10 border-blue-500/20 shadow-md">
-                      <CardHeader className="py-4 px-5 border-b border-blue-500/20">
+                    <Card className="bg-background border-border/50 shadow-md">
+                      <CardHeader className="py-4 px-5 border-b border-border/50">
                         <CardTitle className="text-base flex items-center text-blue-500">
                           <Globe className="size-5 mr-2" /> English (Simple)
                         </CardTitle>
@@ -1444,14 +1444,14 @@ function ProblemChat({ checklists, setChecklists }: { checklists: string[], setC
                       <CardContent className="py-4 px-5 text-[15px] text-blue-100/90 font-medium leading-relaxed">
                         "We are experiencing a temporary network issue in your area. Services will recover shortly. We apologize for the inconvenience."
                       </CardContent>
-                      <div className="bg-blue-500/5 px-5 py-3 flex justify-end">
-                        <Button size="sm" variant="outline" className="text-sm bg-background/50 border-blue-500/30 text-blue-400 hover:bg-blue-500/20 hover:text-blue-300" onClick={() => setDialogData({ lang: 'English', text: '"We are experiencing a temporary network issue in your area. Services will recover shortly. We apologize for the inconvenience."' })}>
+                      <div className="bg-background px-5 py-3 flex justify-end">
+                        <Button size="sm" variant="outline" className="text-sm bg-background/50 border-border/50 text-blue-400 hover:bg-background hover:text-blue-300" onClick={() => setDialogData({ lang: 'English', text: '"We are experiencing a temporary network issue in your area. Services will recover shortly. We apologize for the inconvenience."' })}>
                           <Send className="size-3.5 mr-2" /> Send to User
                         </Button>
                       </div>
                     </Card>
-                    <Card className="bg-emerald-500/10 border-emerald-500/20 shadow-md">
-                      <CardHeader className="py-4 px-5 border-b border-emerald-500/20">
+                    <Card className="bg-background border-border/50 shadow-md">
+                      <CardHeader className="py-4 px-5 border-b border-border/50">
                         <CardTitle className="text-base flex items-center text-emerald-500">
                           <Globe className="size-5 mr-2" /> Sinhala
                         </CardTitle>
@@ -1459,14 +1459,14 @@ function ProblemChat({ checklists, setChecklists }: { checklists: string[], setC
                       <CardContent className="py-4 px-5 text-[15px] text-emerald-100/90 font-medium leading-relaxed">
                         "ඔබගේ ප්‍රදේශයේ ජාලයේ තාවකාලික දෝෂයක් පවතී. සේවා ඉක්මනින් යථා තත්ත්වයට පත්වනු ඇත. සිදුවූ අපහසුතාවයට කනගාටු වෙමු."
                       </CardContent>
-                      <div className="bg-emerald-500/5 px-5 py-3 flex justify-end">
-                        <Button size="sm" variant="outline" className="text-sm bg-background/50 border-emerald-500/30 text-emerald-400 hover:bg-emerald-500/20 hover:text-emerald-300" onClick={() => setDialogData({ lang: 'Sinhala', text: '"ඔබගේ ප්‍රදේශයේ ජාලයේ තාවකාලික දෝෂයක් පවතී. සේවා ඉක්මනින් යථා තත්ත්වයට පත්වනු ඇත. සිදුවූ අපහසුතාවයට කනගාටු වෙමු."' })}>
+                      <div className="bg-background px-5 py-3 flex justify-end">
+                        <Button size="sm" variant="outline" className="text-sm bg-background/50 border-border/50 text-emerald-400 hover:bg-background hover:text-emerald-300" onClick={() => setDialogData({ lang: 'Sinhala', text: '"ඔබගේ ප්‍රදේශයේ ජාලයේ තාවකාලික දෝෂයක් පවතී. සේවා ඉක්මනින් යථා තත්ත්වයට පත්වනු ඇත. සිදුවූ අපහසුතාවයට කනගාටු වෙමු."' })}>
                           <Send className="size-3.5 mr-2" /> Send to User
                         </Button>
                       </div>
                     </Card>
-                    <Card className="bg-purple-500/10 border-purple-500/20 shadow-md">
-                      <CardHeader className="py-4 px-5 border-b border-purple-500/20">
+                    <Card className="bg-background border-border/50 shadow-md">
+                      <CardHeader className="py-4 px-5 border-b border-border/50">
                         <CardTitle className="text-base flex items-center text-purple-500">
                           <Globe className="size-5 mr-2" /> Tamil
                         </CardTitle>
@@ -1474,8 +1474,8 @@ function ProblemChat({ checklists, setChecklists }: { checklists: string[], setC
                       <CardContent className="py-4 px-5 text-[15px] text-purple-100/90 font-medium leading-relaxed">
                         "உங்கள் பகுதியில் தற்காலிக பிணைய கோளாறு உள்ளது. சேவைகள் விரைவில் சீரடையும். சிரமத்திற்கு வருந்துகிறோம்."
                       </CardContent>
-                      <div className="bg-purple-500/5 px-5 py-3 flex justify-end">
-                        <Button size="sm" variant="outline" className="text-sm bg-background/50 border-purple-500/30 text-purple-400 hover:bg-purple-500/20 hover:text-purple-300" onClick={() => setDialogData({ lang: 'Tamil', text: '"உங்கள் பகுதியில் தற்காலிக பிணைய கோளாறு உள்ளது. சேவைகள் விரைவில் சீரடையும். சிரமத்திற்கு வருந்துகிறோம்."' })}>
+                      <div className="bg-background px-5 py-3 flex justify-end">
+                        <Button size="sm" variant="outline" className="text-sm bg-background/50 border-border/50 text-purple-400 hover:bg-background hover:text-purple-300" onClick={() => setDialogData({ lang: 'Tamil', text: '"உங்கள் பகுதியில் தற்காலிக பிணைய கோளாறு உள்ளது. சேவைகள் விரைவில் சீரடையும். சிரமத்திற்கு வருந்துகிறோம்."' })}>
                           <Send className="size-3.5 mr-2" /> Send to User
                         </Button>
                       </div>
@@ -1693,30 +1693,30 @@ function AgentDashboard() {
               <Reply className="size-4 mr-1.5" /> Ask AI
             </Button>
           </Card>
-          <Card className="relative group overflow-hidden border-border/80 shadow-sm hover:border-emerald-500/50 transition-colors bg-background">
+          <Card className="relative group overflow-hidden border-border/80 shadow-sm hover:border-border/50 transition-colors bg-background">
             <CardContent className="p-6">
               <div className="text-muted-foreground font-semibold mb-1 text-sm uppercase tracking-wider">MTTR Reduction</div>
               <div className="text-4xl font-black text-emerald-500">-65%</div>
             </CardContent>
-            <Button variant="secondary" size="sm" className="absolute top-4 right-4 opacity-0 group-hover:opacity-100 transition-opacity bg-emerald-500/10 text-emerald-500 hover:bg-emerald-500/20" onClick={() => askAbout('MTTR Reduction')}>
+            <Button variant="secondary" size="sm" className="absolute top-4 right-4 opacity-0 group-hover:opacity-100 transition-opacity bg-background text-emerald-500 hover:bg-background" onClick={() => askAbout('MTTR Reduction')}>
               <Reply className="size-4 mr-1.5" /> Ask AI
             </Button>
           </Card>
-          <Card className="relative group overflow-hidden border-border/80 shadow-sm hover:border-blue-500/50 transition-colors bg-background">
+          <Card className="relative group overflow-hidden border-border/80 shadow-sm hover:border-border/50 transition-colors bg-background">
             <CardContent className="p-6">
               <div className="text-muted-foreground font-semibold mb-1 text-sm uppercase tracking-wider">Notifications Sent</div>
               <div className="text-4xl font-black text-blue-500">24,592</div>
             </CardContent>
-            <Button variant="secondary" size="sm" className="absolute top-4 right-4 opacity-0 group-hover:opacity-100 transition-opacity bg-blue-500/10 text-blue-500 hover:bg-blue-500/20" onClick={() => askAbout('Customer Notifications')}>
+            <Button variant="secondary" size="sm" className="absolute top-4 right-4 opacity-0 group-hover:opacity-100 transition-opacity bg-background text-blue-500 hover:bg-background" onClick={() => askAbout('Customer Notifications')}>
               <Reply className="size-4 mr-1.5" /> Ask AI
             </Button>
           </Card>
-          <Card className="relative group overflow-hidden border-border/80 shadow-sm hover:border-purple-500/50 transition-colors bg-background">
+          <Card className="relative group overflow-hidden border-border/80 shadow-sm hover:border-border/50 transition-colors bg-background">
             <CardContent className="p-6">
               <div className="text-muted-foreground font-semibold mb-1 text-sm uppercase tracking-wider">Diagnostic Accuracy</div>
               <div className="text-4xl font-black text-purple-500">97.4%</div>
             </CardContent>
-            <Button variant="secondary" size="sm" className="absolute top-4 right-4 opacity-0 group-hover:opacity-100 transition-opacity bg-purple-500/10 text-purple-500 hover:bg-purple-500/20" onClick={() => askAbout('Diagnostic Accuracy')}>
+            <Button variant="secondary" size="sm" className="absolute top-4 right-4 opacity-0 group-hover:opacity-100 transition-opacity bg-background text-purple-500 hover:bg-background" onClick={() => askAbout('Diagnostic Accuracy')}>
               <Reply className="size-4 mr-1.5" /> Ask AI
             </Button>
           </Card>
@@ -1777,7 +1777,7 @@ function AgentDashboard() {
                 {areaData.map((area, idx) => (
                   <div key={idx} className="p-4 flex items-center justify-between hover:bg-muted/30 transition-colors">
                     <div className="flex items-center gap-3">
-                      <div className="size-8 rounded-full bg-orange-500/10 text-orange-500 flex items-center justify-center font-bold text-sm shadow-sm border border-orange-500/20">{idx + 1}</div>
+                      <div className="size-8 rounded-full bg-background text-orange-500 flex items-center justify-center font-bold text-sm shadow-sm border border-border/50">{idx + 1}</div>
                       <span className="font-semibold text-[15px]">{area.name}</span>
                     </div>
                     <div className="flex items-center gap-2">
@@ -2000,7 +2000,7 @@ function NewInvestigation() {
               {nearbyCells.map(cell => (
                 <div
                   key={cell.id}
-                  className={`flex items-center gap-4 p-3 rounded-xl border ${selectedCells.includes(cell.id) ? 'border-primary/50 bg-primary/10 shadow-[0_0_15px_rgba(59,130,246,0.1)]' : 'border-border/50 hover:bg-muted/40'} cursor-pointer transition-all duration-200`}
+                  className={`flex items-center gap-4 p-3 rounded-xl border ${selectedCells.includes(cell.id) ? 'border-primary/50 bg-primary/10 shadow-sm' : 'border-border/50 hover:bg-muted/40'} cursor-pointer transition-all duration-200`}
                   onClick={() => {
                     setSelectedCells(prev => prev.includes(cell.id) ? prev.filter(c => c !== cell.id) : [...prev, cell.id]);
                   }}
@@ -2054,7 +2054,7 @@ function NewInvestigation() {
         <div className="absolute top-4 right-4 z-[400] bg-background/90 backdrop-blur border border-border p-3 rounded-lg shadow-lg w-[200px]">
           <div className="text-xs font-semibold mb-2">Map Legend</div>
           <div className="flex items-center gap-2 text-xs mb-1"><div className="size-3 bg-blue-500 rounded-full" /> User Dropped Pin</div>
-          <div className="flex items-center gap-2 text-xs"><div className="size-3 border-2 border-red-500 rounded-full bg-red-500/20" /> Reference Cells</div>
+          <div className="flex items-center gap-2 text-xs"><div className="size-3 border-2 border-red-500 rounded-full bg-background" /> Reference Cells</div>
         </div>
         <MapContainer center={position} zoom={13} style={{ height: '100%', width: '100%' }} zoomControl={false}>
           <TileLayer
@@ -2073,7 +2073,7 @@ function NewInvestigation() {
               }}
               icon={L.divIcon({
                 className: 'bg-transparent',
-                html: `<div class="size-4 border-2 ${selectedCells.includes(cell.id) ? 'border-primary bg-primary/50 shadow-[0_0_15px_rgba(59,130,246,0.8)]' : 'border-red-500 bg-red-500/20 shadow-[0_0_10px_rgba(239,68,68,0.5)]'} rounded-full transition-colors duration-300"></div>`
+                html: `<div class="size-4 border-2 ${selectedCells.includes(cell.id) ? 'border-primary bg-primary/50 shadow-sm' : 'border-red-500 bg-background shadow-sm'} rounded-full transition-colors duration-300"></div>`
               })}
             >
               <Popup>{cell.id} - {cell.band} {selectedCells.includes(cell.id) ? '(Selected)' : ''}</Popup>
@@ -2134,7 +2134,7 @@ function HiddenProblems() {
           {filtered.map(prob => (
             <Card key={prob.id} className="bg-background shadow-sm border-border/80 hover:border-primary/50 transition-colors cursor-pointer group" onClick={() => navigate(`/chat/${prob.id}`)}>
               <CardContent className="p-6 flex items-start gap-6">
-                <div className={`size-14 rounded-full shrink-0 flex items-center justify-center ${prob.severity === 'Critical' ? 'bg-red-500/10 text-red-500' : prob.severity === 'High' ? 'bg-orange-500/10 text-orange-500' : 'bg-blue-500/10 text-blue-500'}`}>
+                <div className={`size-14 rounded-full shrink-0 flex items-center justify-center ${prob.severity === 'Critical' ? 'bg-background text-red-500' : prob.severity === 'High' ? 'bg-background text-orange-500' : 'bg-background text-blue-500'}`}>
                   <Ghost className="size-6" />
                 </div>
                 <div className="flex-1 space-y-2">
