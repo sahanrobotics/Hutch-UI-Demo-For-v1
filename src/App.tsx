@@ -648,6 +648,7 @@ function ProblemChat({ checklists, setChecklists }: { checklists: string[], setC
   const inputRef = useRef<HTMLInputElement>(null);
 
   const [chatInput, setChatInput] = useState("");
+  const [reference, setReference] = useState<string | null>(null);
   const [isTyping, setIsTyping] = useState(false);
   const [dialogData, setDialogData] = useState<{ lang: string, text: string } | null>(null);
 
@@ -752,10 +753,14 @@ function ProblemChat({ checklists, setChecklists }: { checklists: string[], setC
 
   const handleSendMessage = (textOverride?: string) => {
     const userMsg = textOverride || chatInput;
-    if (!userMsg.trim()) return;
+    if (!userMsg.trim() && !reference && !textOverride) return;
 
-    setMessages(prev => [...prev, { role: 'user', content: userMsg }]);
-    setChatInput("");
+    const fullMsg = reference && !textOverride ? `[Ref: ${reference}] ${userMsg}` : userMsg;
+    setMessages(prev => [...prev, { role: 'user', content: fullMsg }]);
+    if (!textOverride) {
+      setChatInput("");
+      setReference(null);
+    }
     setIsTyping(true);
 
     setTimeout(() => {
@@ -808,7 +813,7 @@ function ProblemChat({ checklists, setChecklists }: { checklists: string[], setC
   };
 
   const handleReferenceStep = (stepNum: number, title: string) => {
-    setChatInput(`[Ref: Step ${stepNum} - ${title}] `);
+    setReference(`Step ${stepNum} - ${title}`);
     setTimeout(() => {
       inputRef.current?.focus();
     }, 50);
@@ -1536,12 +1541,14 @@ function ProblemChat({ checklists, setChecklists }: { checklists: string[], setC
       <div className="absolute z-[999] bottom-8 left-1/2 -translate-x-1/2 w-full max-w-3xl px-4">
         <div className="w-full bg-[#1A1A1A] border border-white/5 rounded-[32px] p-3 shadow-2xl flex flex-col gap-1 transition-all focus-within:ring-1 focus-within:ring-white/10">
           
-          <div className="flex items-center px-2 pt-1">
-            <div className="bg-[#2D2D2D] border border-white/5 rounded-xl py-1.5 px-3 flex items-center shadow-sm w-fit transition-colors hover:bg-[#333333] cursor-pointer">
-               <ImageIcon className="size-3.5 mr-2 text-muted-foreground" />
-               <span className="text-[13px] font-medium text-foreground/90">image.png</span>
-               <X className="size-3.5 ml-3 text-muted-foreground hover:text-white transition-colors" />
-            </div>
+          <div className="flex items-center px-2 pt-1 h-[32px]">
+            {reference && (
+              <div className="bg-[#2D2D2D] border border-white/5 rounded-xl py-1.5 px-3 flex items-center shadow-sm w-fit transition-colors hover:bg-[#333333] cursor-pointer">
+                 <img src="/Bot.png" className="size-3.5 mr-2" alt="bot" />
+                 <span className="text-[13px] font-medium text-foreground/90">{reference}</span>
+                 <X className="size-3.5 ml-3 text-muted-foreground hover:text-white transition-colors" onClick={(e) => { e.stopPropagation(); setReference(null); }} />
+              </div>
+            )}
           </div>
 
           <div className="flex items-center px-1">
@@ -1582,8 +1589,9 @@ function ProblemChat({ checklists, setChecklists }: { checklists: string[], setC
 
 function AgentDashboard() {
   const [chatInput, setChatInput] = useState("");
+  const [reference, setReference] = useState<string | null>(null);
   const [messages, setMessages] = useState<any[]>([
-    { role: 'ai', content: 'Hello! I am the TeleQ Bot Operations agent. You can ask me to analyze any of the high-level network statistics on this dashboard.' }
+    { role: 'ai', content: 'Hello! I am the TeleQ Bot Operations agent. You can ask me to analyze any of the high-level network statistics on this dashboard.', options: ["Show failing sectors", "Analyze Microwave links", "Compare with last week"] }
   ]);
   const [isTyping, setIsTyping] = useState(false);
   const inputRef = useRef<HTMLInputElement>(null);
@@ -1595,25 +1603,51 @@ function AgentDashboard() {
 
   const handleSendMessage = (textOverride?: string) => {
     const userMsg = textOverride || chatInput;
-    if (!userMsg.trim()) return;
-    setMessages(prev => [...prev, { role: 'user', content: userMsg }]);
-    setChatInput("");
+    if (!userMsg.trim() && !reference && !textOverride) return;
+    
+    const fullMsg = reference && !textOverride ? `[Ref: ${reference}] ${userMsg}` : userMsg;
+    setMessages(prev => [...prev, { role: 'user', content: fullMsg }]);
+    if (!textOverride) {
+      setChatInput("");
+      setReference(null);
+    }
     setIsTyping(true);
 
     setTimeout(() => {
       setIsTyping(false);
-      let reply = `I've analyzed that metric for you. The data shows a 42% improvement week-over-week directly correlated to automated triaging.`;
-      if (userMsg.includes("Problem Frequency")) {
-        reply = `The highest frequency anomaly detected by the AI this week is "Hardware (VSWR/Cable)" issues, constituting nearly 30% of all alerts. This indicates a physical degradation pattern that manual teams are currently addressing.`;
-      } else if (userMsg.includes("Most Affected Areas")) {
-        reply = `Kandy City Center has triggered 145 AI-based congestion warnings this week, primarily due to intermittent hardware failure (VSWR). I recommend prioritizing Field Rigging dispatches to this region.`;
+      let replyMsg: any = { role: 'ai', content: "I've analyzed the network health. The overall stability score is 92%, but there are emerging anomalies.", options: ["Show top failing sectors", "Analyze Microwave links"] };
+      
+      if (fullMsg.toLowerCase().includes("failing sectors") || fullMsg.toLowerCase().includes("sectors")) {
+         replyMsg.content = "Here are the top 3 worst performing sectors across the island right now based on RRC connection drops:";
+         replyMsg.table = {
+           headers: ["Sector ID", "Location", "Drop Rate", "Trend"],
+           rows: [
+             ["CMB-004-A", "Colombo 4", "12.4%", "🔴 Worsening"],
+             ["KND-012-C", "Kandy Town", "9.8%", "🟡 Stable"],
+             ["GAL-009-B", "Galle Fort", "8.1%", "🟢 Improving"]
+           ]
+         };
+         replyMsg.options = ["Investigate CMB-004-A", "Show active alarms"];
+      } else if (fullMsg.toLowerCase().includes("investigate cmb")) {
+         replyMsg.content = "Deep scan initiated for **CMB-004-A**.\n\nPrimary issue detected: **VSWR alarm active on Antenna Port 1**. The hardware is likely degraded or experiencing water ingress due to recent rain.\n\nRecommended actions:";
+         replyMsg.options = ["Create Field Ticket", "Mute Alarm temporarily"];
+      } else if (fullMsg.includes("Problem Frequency")) {
+        replyMsg.content = "The highest frequency anomaly detected by the AI this week is **Hardware (VSWR/Cable)** issues, constituting nearly 30% of all alerts. This indicates a physical degradation pattern that manual teams are currently addressing.";
+        replyMsg.options = ["Show VSWR trends", "List affected sites"];
+      } else if (fullMsg.includes("Most Affected Areas")) {
+        replyMsg.content = "Kandy City Center has triggered **145 AI-based congestion warnings** this week, primarily due to intermittent hardware failure. I recommend prioritizing Field Rigging dispatches to this region.";
+        replyMsg.options = ["Generate dispatch report"];
+      } else if (fullMsg.toLowerCase().includes("create field ticket")) {
+        replyMsg.content = "✅ **Field Ticket #TKT-8992** has been automatically generated and dispatched to the Colombo Regional Maintenance Team. They will inspect the VSWR issue on Port 1 at CMB-004-A.";
+        replyMsg.options = ["View Ticket Status"];
       }
-      setMessages(prev => [...prev, { role: 'ai', content: reply }]);
+      
+      setMessages(prev => [...prev, replyMsg]);
     }, 1500);
   };
 
   const askAbout = (topic: string) => {
-    setChatInput(`[Ref: ${topic}] Please explain this metric.`);
+    setReference(topic);
     setTimeout(() => inputRef.current?.focus(), 50);
   };
 
@@ -1763,9 +1797,36 @@ function AgentDashboard() {
         </div>
         <div className="flex-1 overflow-y-auto p-5 space-y-5" ref={scrollRef}>
           {messages.map((m, i) => (
-            <div key={i} className={`flex flex-col gap-1.5 ${m.role === 'user' ? 'items-end' : 'items-start'}`}>
-              <div className={`p-4 rounded-2xl text-[14px] leading-relaxed max-w-[90%] shadow-sm ${m.role === 'user' ? 'bg-primary text-primary-foreground rounded-tr-sm' : 'bg-muted/50 border border-border/50 text-foreground rounded-tl-sm'}`}>
-                {m.content}
+            <div key={i} className={`flex flex-col gap-2 ${m.role === 'user' ? 'items-end' : 'items-start'}`}>
+              <div className={`p-4 rounded-2xl text-[14px] leading-relaxed max-w-[95%] shadow-sm ${m.role === 'user' ? 'bg-primary text-primary-foreground rounded-tr-sm' : 'bg-muted/50 border border-border/50 text-foreground rounded-tl-sm'}`}>
+                <div dangerouslySetInnerHTML={{ __html: m.content.replace(/\n/g, '<br/>') }} />
+                {m.table && (
+                  <div className="mt-4 rounded-xl border border-border/80 bg-background overflow-hidden shadow-sm">
+                    <table className="w-full text-xs text-left">
+                      <thead className="bg-muted/50 border-b border-border/50">
+                        <tr>
+                          {m.table.headers.map((h:any, hi:any) => <th key={hi} className="p-3 text-foreground font-semibold">{h}</th>)}
+                        </tr>
+                      </thead>
+                      <tbody className="divide-y divide-border/50">
+                        {m.table.rows.map((row:any, ri:any) => (
+                          <tr key={ri} className="hover:bg-muted/20">
+                            {row.map((cell:any, ci:any) => <td key={ci} className="p-3 text-muted-foreground">{cell}</td>)}
+                          </tr>
+                        ))}
+                      </tbody>
+                    </table>
+                  </div>
+                )}
+                {m.options && (
+                  <div className="mt-4 flex flex-wrap gap-2">
+                    {m.options.map((opt:any, oi:any) => (
+                      <button key={oi} className="bg-primary/10 hover:bg-primary text-primary hover:text-primary-foreground border border-primary/20 text-[11px] px-3 py-1.5 rounded-full transition-colors font-semibold text-left shadow-sm" onClick={() => handleSendMessage(opt)}>
+                        {opt}
+                      </button>
+                    ))}
+                  </div>
+                )}
               </div>
             </div>
           ))}
@@ -1780,6 +1841,15 @@ function AgentDashboard() {
           )}
         </div>
         <div className="p-4 border-t border-border/50 bg-muted/10 shrink-0">
+          {reference && (
+            <div className="mb-3 flex items-center gap-2 bg-primary/10 border border-primary/20 text-primary w-max px-3 py-1.5 rounded-full text-xs shadow-sm">
+              <img src="/Bot.png" className="size-4" alt="bot" />
+              <span className="font-semibold">{reference}</span>
+              <button onClick={() => setReference(null)} className="ml-1 hover:text-foreground hover:bg-background/50 rounded-full p-0.5 transition-colors">
+                <X className="size-3.5" />
+              </button>
+            </div>
+          )}
           <div className="relative">
             <Input
               ref={inputRef}
